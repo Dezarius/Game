@@ -1,0 +1,24 @@
+# By GIT ignored files and directories
+
+### OSX ###
+.DS_Store
+
+### Java compiled binaries ###
+*.class
+build/
+*.jar
+
+### Archive ###
+*.zip
+*.rar
+
+### NetBeans ###
+build.xml
+nbproject/
+
+
+### .gitignore 'Vergew...' von JA
+
+### .gitignore 'Vergew...' von KD
+*.command
+*.app
