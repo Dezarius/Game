@@ -1,8 +1,8 @@
+package states;
+
 /*
  * © 2015 Jan Abelmann
  */
-
-package states;
 
 import gui.Resources;
 import org.newdawn.slick.GameContainer;
@@ -11,29 +11,26 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.tiled.TiledMap;
 import world.World;
-import world.WorldManager;
 
 /**
- * InGame-State
+ * Menu-State
  * 
- * Renders and updates the game
+ * Renders and updates the menu
  */
-public class GameState extends BasicGameState {
+public class InGameMenuState extends BasicGameState {
   
   /**
-   * Returns the Id of the State
-   * 
+   * Returns the ID of the State
    * @return StateId
    */
   @Override
   public int getID() {
-    return StateManager.GAME;
+    return StateManager.INGAMEMENU;
   }
 
   /**
-   * Init the Game
+   * Init the menu
    * 
    * @param gc
    * @param s
@@ -41,12 +38,11 @@ public class GameState extends BasicGameState {
    */
   @Override
   public void init(GameContainer gc, StateBasedGame s) throws SlickException {
-    World.loadAllMaps();
-    World.changeCurrentMap(-1);
+    
   }
 
   /**
-   * Renders the Game
+   * Renders the menu
    * 
    * @param gc
    * @param s
@@ -56,9 +52,10 @@ public class GameState extends BasicGameState {
   @Override
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
     World.renderCurrentMap();
-    g.drawString("Game", 50, 50);
+    Resources.getImage("MapOverlay").draw(0, 0);
+    g.drawString("InGameMenu", 50, 50);
   }
-  
+
   /**
    * Updates the logic
    * 
@@ -70,10 +67,10 @@ public class GameState extends BasicGameState {
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
     if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-      s.enterState(StateManager.INGAMEMENU);
+      s.enterState(StateManager.GAME);
     }
-    if(gc.getInput().isKeyPressed(Input.KEY_0)) {
-      World.changeCurrentMap(WorldManager.startmap);
+    else if(gc.getInput().isKeyPressed(Input.KEY_M)) {
+      s.enterState(StateManager.MENU);
     }
   }
 

@@ -12,13 +12,14 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
+import world.Tile;
 
 /**
  * Holds Maps of all images,sprites and sounds.
  */
 public class Resources {
 
-  private static Map<String, Image> images;
+  private static Map<String, Image> images; 
   private static Map<String, SpriteSheet> sprites;
   private static Map<String, Sound> sounds;
   
@@ -26,13 +27,15 @@ public class Resources {
    * Init all Maps and loads all images,sounds,sprites.
    */
   public Resources() {
-    images = new HashMap<String, Image>();
-    sprites = new HashMap<String, SpriteSheet>();
-    sounds = new HashMap<String, Sound>();
+    images = new HashMap<>();
+    sprites = new HashMap<>();
+    sounds = new HashMap<>();
     
     try {
-      images.put("AIR", loadImage("AIR.png"));
+      sprites.put("tileset", loadSprite("tilesheet.png",Tile.SIZE,Tile.SIZE));
+      images.put("MapOverlay",loadImage("mapOverlay.png"));
     } catch (SlickException ex) {
+      System.out.println("FEHLER!");
       Logger.getLogger(Resources.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
@@ -65,7 +68,7 @@ public class Resources {
    * @param getter Name of the SpriteSheet
    * @return the hole SpriteSheet
    */
-  public static Image getSprite(String getter) {
+  public static SpriteSheet getSprite(String getter) {
     return sprites.get(getter);
   }
   

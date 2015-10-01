@@ -35,9 +35,10 @@ public class Engine extends StateBasedGame{
     
     //loads all Recourses
     new Resources();
-    
+
     //adds all GameStates
     this.addState(new MenuState());
     this.addState(new GameState()); 
+    this.addState(new InGameMenuState());
   }
 }

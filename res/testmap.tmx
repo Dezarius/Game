@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="81">
+  <image source="tilesheet.png" width="288" height="288"/>
+ </tileset>
+ <layer name="solids" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+2WsQ7DIAwFabs13dL+/6+23RCyCRCeyXCWbkPEZxPDllLaAOAUtx/3jEfHWo/aHioHK6w8vLVeRLi05FTWeCTULs/BvEZC6RLp8Qr0eE+mDFVPcg9Fvco6qXpSfmdmvawZovJQ9d6bg8p/ZJ/sUpvlSg/rfI26HN1Hag+rJ70uqx2OXFreUS33/CfIo+ZyNiIdVC5R58lzsWZyb/z3WNELz8d7Z9TiCvm3euVcOW8AAAAAAAAAAAAAWMcXrH7lsRAnAAA=
+  </data>
+ </layer>
+</map>
