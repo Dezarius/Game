@@ -5,6 +5,7 @@
 package main;
 
 import gui.Resources;
+import gui.Window;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -14,6 +15,7 @@ import states.*;
  * Engine of the Game
  */
 public class Engine extends StateBasedGame{
+  
   
   /**
    * Creates a Window with the given Name
@@ -31,11 +33,11 @@ public class Engine extends StateBasedGame{
     gc.setAlwaysRender(true);
     gc.setMaximumLogicUpdateInterval(60);
     gc.setVSync(true);
-    gc.setShowFPS(false);
+    gc.setShowFPS(true);
     
     //loads all Recourses
     new Resources();
-
+    
     //adds all GameStates
     this.addState(new MenuState());
     this.addState(new GameState()); 

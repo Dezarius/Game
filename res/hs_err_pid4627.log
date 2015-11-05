@@ -1,0 +1,95 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fff933670dd, pid=4627, tid=1811
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_66-b17) (build 1.8.0_66-b17)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.66-b17 mixed mode bsd-amd64 compressed oops)
+# Problematic frame:
+# C  [libobjc.A.dylib+0x10dd]  objc_msgSend+0x1d
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fd66701a800):  JavaThread "AppKit Thread" daemon [_thread_in_native, id=1811, stack(0x00007fff58ced000,0x00007fff594ed000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000000018
+
+Registers:
+RAX=0x0000000000000000, RBX=0x00007fd663f55650, RCX=0x0000000000000000, RDX=0x00007fd663f55650
+RSP=0x00007fff594e7cd8, RBP=0x00007fff594e7d00, RSI=0x00007fff9548937c, RDI=0x00007fd663f16d10
+R8 =0x0000000000000001, R9 =0x0000000000000001, R10=0x00007fff9548937c, R11=0x0000000000000000
+R12=0x0000000000000094, R13=0x00007fd666062980, R14=0x00007fd663f16d10, R15=0x00007fff594e81f0
+RIP=0x00007fff933670dd, EFLAGS=0x0000000000010246, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007fff594e7cd8)
+0x00007fff594e7cd8:   0000000124012598 00007fd663f55650
+0x00007fff594e7ce8:   0000000124046c60 00007fd666062980
+0x00007fff594e7cf8:   00007fd663f55650 00007fff594e81e0
+0x00007fff594e7d08:   00007fff94b69f45 0000000000000000
+0x00007fff594e7d18:   0000000000000000 4094000000000000
+0x00007fff594e7d28:   4086800000000000 0000000000000000
+0x00007fff594e7d38:   0000000000000000 4094000000000000
+0x00007fff594e7d48:   4086800000000000 4094000000000000
+0x00007fff594e7d58:   4087300000000000 401c000000000000
+0x00007fff594e7d68:   4086980000000000 402c000000000000
+0x00007fff594e7d78:   4030000000000000 401c000000000000
+0x00007fff594e7d88:   0000000000000000 0000000000000000
+0x00007fff594e7d98:   4030000000000000 00007fff9544c129
+0x00007fff594e7da8:   4018000000000000 00007fd666246640
+0x00007fff594e7db8:   0000000100000000 0000000000000000
+0x00007fff594e7dc8:   00007fd666056160 00007fff594e7f20
+0x00007fff594e7dd8:   00007fff94b6eb36 00007fff594e7f20
+0x00007fff594e7de8:   00007fff94b70e82 402c000000000000
+0x00007fff594e7df8:   4030000000000000 401c000000000000
+0x00007fff594e7e08:   4086980000000000 402c000000000000
+0x00007fff594e7e18:   4030000000000000 0000000000000000
+0x00007fff594e7e28:   0000000000000000 4094000000000000
+0x00007fff594e7e38:   4087300000000000 401c000000000000
+0x00007fff594e7e48:   4086980000000000 0000000106731a00
+0x00007fff594e7e58:   00007fd666279890 00000000000000b0
+0x00007fff594e7e68:   0000000000000000 0000000000000798
+0x00007fff594e7e78:   000000010672e000 00007fff594e7f20
+0x00007fff594e7e88:   00007fff965cee7f 0000000000000798
+0x00007fff594e7e98:   000000010672e000 00007fff594e7f40
+0x00007fff594e7ea8:   0000000000000799 00007fff594e7faf
+0x00007fff594e7eb8:   0000000000000200 00007fd6662fc080
+0x00007fff594e7ec8:   00007fd6662797e0 000000000000000e 
+
+Instructions: (pc=0x00007fff933670dd)
+0x00007fff933670bd:   00 00 00 48 85 ff 2e 74 7a 40 f6 c7 01 2e 75 7e
+0x00007fff933670cd:   49 bb f8 ff ff ff ff 7f 00 00 4c 23 1f 49 89 f2
+0x00007fff933670dd:   45 23 53 18 49 c1 e2 04 4d 03 53 10 49 3b 32 75
+0x00007fff933670ed:   04 41 ff 62 08 49 83 3a 00 74 6a 4d 3b 53 10 74 
+
+Register to memory mapping:
+
+RAX=0x0000000000000000 is an unknown value
+RBX=0x00007fd663f55650 is an unknown value
+RCX=0x0000000000000000 is an unknown value
+RDX=0x00007fd663f55650 is an unknown value
+RSP=0x00007fff594e7cd8 is pointing into the stack for thread: 0x00007fd66701a800
+RBP=0x00007fff594e7d00 is pointing into the stack for thread: 0x00007fd66701a800
+RSI=0x00007fff9548937c: -[NSTitlebarContainerView transparent]+0x5e270 in /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit at 0x00007fff94a88000
+RDI=0x00007fd663f16d10 is an unknown value
+R8 =0x0000000000000001 is an unknown value
+R9 =0x0000000000000001 is an unknown value
+R10=0x00007fff9548937c: -[NSTitlebarContainerView transparent]+0x5e270 in /System/Library/Frameworks/AppKit.framework/Versions/C/AppKit at 0x00007fff94a88000
+R11=0x0000000000000000 is an unknown value
+R12=0x0000000000000094 is an unknown value
+R13=0x00007fd666062980 is an unknown value
+R14=0x00007fd663f16d10 is an unknown value
+R15=0x00007fff594e81f0 is pointing into the stack for thread: 0x00007fd66701a800
+
+
+Stack: [0x00007fff58ced000,0x00007fff594ed000],  sp=0x00007fff594e7cd8,  free space=8171k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libobjc.A.dylib+0x10dd]  objc_msgSend+0x1d

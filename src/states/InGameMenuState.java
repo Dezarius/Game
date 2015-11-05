@@ -4,10 +4,11 @@ package states;
  * © 2015 Jan Abelmann
  */
 
+import Entity.EntityManager;
+import Input.Keyboard;
 import gui.Resources;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -52,8 +53,10 @@ public class InGameMenuState extends BasicGameState {
   @Override
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
     World.renderCurrentMap();
+    EntityManager.player.draw();
     Resources.getImage("MapOverlay").draw(0, 0);
     g.drawString("InGameMenu", 50, 50);
+    
   }
 
   /**
@@ -66,12 +69,7 @@ public class InGameMenuState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-      s.enterState(StateManager.GAME);
-    }
-    else if(gc.getInput().isKeyPressed(Input.KEY_M)) {
-      s.enterState(StateManager.MENU);
-    }
+    Keyboard.input(gc, s);
   }
 
 }

@@ -5,7 +5,12 @@
  </tileset>
  <layer name="solids" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+2WsQ7DIAwFabs13dL+/6+23RCyCRCeyXCWbkPEZxPDllLaAOAUtx/3jEfHWo/aHioHK6w8vLVeRLi05FTWeCTULs/BvEZC6RLp8Qr0eE+mDFVPcg9Fvco6qXpSfmdmvawZovJQ9d6bg8p/ZJ/sUpvlSg/rfI26HN1Hag+rJ70uqx2OXFreUS33/CfIo+ZyNiIdVC5R58lzsWZyb/z3WNELz8d7Z9TiCvm3euVcOW8AAAAAAAAAAAAAWMcXrH7lsRAnAAA=
+   H4sIAAAAAAAAA+3SOw6AMBAD0e1z//tyAcInrO0IjaXXUewAo6oGgE/O9ubZqyUbZjesLnV/9/7SUQ330tE/R4fjPbm+h/pbO/8r5f+q6FC03E3V0dXydImO7ikbnC2ODkeLq0PV4rxf2ZLq6OpJ37/alb4PAAAAAAAAALCfA7oQZdMQJwAA
+  </data>
+ </layer>
+ <layer name="interactives" width="50" height="50" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+3OMQ0AAAgDsP3494uMQdIqaALAZdMOAAAAAAAAAAA8sa+JPBsQJwAA
   </data>
  </layer>
 </map>

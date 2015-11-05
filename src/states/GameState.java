@@ -4,14 +4,15 @@
 
 package states;
 
-import gui.Resources;
+import Entity.EntityManager;
+import Entity.Player;
+import Input.Keyboard;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.tiled.TiledMap;
 import world.World;
 import world.WorldManager;
 
@@ -41,7 +42,6 @@ public class GameState extends BasicGameState {
    */
   @Override
   public void init(GameContainer gc, StateBasedGame s) throws SlickException {
-    World.loadAllMaps();
     World.changeCurrentMap(-1);
   }
 
@@ -56,6 +56,7 @@ public class GameState extends BasicGameState {
   @Override
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
     World.renderCurrentMap();
+    EntityManager.player.draw();
     g.drawString("Game", 50, 50);
   }
   
@@ -69,12 +70,9 @@ public class GameState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-      s.enterState(StateManager.INGAMEMENU);
-    }
-    if(gc.getInput().isKeyPressed(Input.KEY_0)) {
-      World.changeCurrentMap(WorldManager.startmap);
-    }
+    Keyboard.input(gc, s);
+    Keyboard.playerInput(gc);
+    EntityManager.player.move();
   }
 
 }

@@ -10,7 +10,8 @@ package world;
  */
 public class WorldManager {
 
-  public static final int startmap = 0;
-  
+  public static final String[] maps = {"/testmap.tmx", //0
+                                       "/level1.tmx"   //1         
+  };
   
 }
