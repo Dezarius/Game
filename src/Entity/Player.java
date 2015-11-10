@@ -28,30 +28,46 @@ public class Player {
   }
   
   public void move() {
-    x = x + velX;
-    if(!World.isSolid((int) x / Tile.SIZE, (int) y / Tile.SIZE + 1)) {
-      velY = EntityManager.applyGravity(velY);
-    } else {
+    
+    if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY+ 32) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY + 32) / Tile.SIZE)) {
+      y = (y + velY) - ((y + velY) % Tile.SIZE);
       velY = 0;
-      y = y - (y % Tile.SIZE);
+    }
+    else if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY) / Tile.SIZE)) {
+      y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
+      velY = 0;
+    }
+    else {
+      velY = EntityManager.applyGravity(velY);
+      y = y + velY;
     }
     
-    y = y + velY;
-
+    if(World.collision((int) (x + velX) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
+    x = (x + velX) + (Tile.SIZE - (x+velX) % Tile.SIZE);
+    velX = 0;
+    }
+    else if(World.collision((int) (x + velX + 32) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX + 32) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
+    x = (x + velX) - ((x+velX) % Tile.SIZE);
+    velX = 0;
+    }
+    else {
+      x = x + velX;
+    }
+ 
   }
   
   public void moveX(boolean right) {
     if(right && velX < 5) {
-      velX = velX + 0.1f;
+      velX = velX + 0.2f;
     } else if(!right && velX > -5) {
-      velX = velX - 0.1f;
+      velX = velX - 0.2f;
     }
   }
   public void slowX() {
     if(velX < -0.2) {
-      velX = velX + 0.1f;
+      velX = velX + 0.2f;
     } else if(velX > 0.2) {
-      velX = velX - 0.1f;
+      velX = velX - 0.2f;
     }
     else {
       velX = 0;
@@ -66,6 +82,10 @@ public class Player {
   }
   public float getVelX() {
     return velX;
+  }
+  
+  public float getVelY() {
+    return velY;
   }
   
   public float getX() {

@@ -19,9 +19,12 @@ import world.World;
  */
 public class Keyboard {
   
-  public static void input(GameContainer gc,StateBasedGame s) throws SlickException {
+  public static void input(GameContainer gc,StateBasedGame s) {
     changeState(gc,s);
-    playerInput(gc);
+
+  }
+  
+  public static void changeMap(GameContainer gc) throws SlickException {
     if(gc.getInput().isKeyPressed(Input.KEY_0)) {
       World.changeCurrentMap(0);
     }
@@ -42,7 +45,10 @@ public class Keyboard {
       EntityManager.player.moveX(false);
     } 
     else{
-      if(World.isSolid((int) EntityManager.player.getX() / Tile.SIZE, (int) EntityManager.player.getY() / Tile.SIZE + 1)) {
+      if(World.collision( (int) EntityManager.player.getX() / Tile.SIZE,
+              (int) (EntityManager.player.getY() + EntityManager.player.getVelY()) / Tile.SIZE + 1 ,
+              (int) EntityManager.player.getX() / Tile.SIZE + 1,
+              (int) (EntityManager.player.getY() + EntityManager.player.getVelY()) / Tile.SIZE + 1 )) {
         EntityManager.player.slowX();
       }
     }

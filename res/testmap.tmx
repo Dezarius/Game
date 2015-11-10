@@ -8,9 +8,9 @@
    H4sIAAAAAAAAA+3SOw6AMBAD0e1z//tyAcInrO0IjaXXUewAo6oGgE/O9ubZqyUbZjesLnV/9/7SUQ330tE/R4fjPbm+h/pbO/8r5f+q6FC03E3V0dXydImO7ikbnC2ODkeLq0PV4rxf2ZLq6OpJ37/alb4PAAAAAAAAALCfA7oQZdMQJwAA
   </data>
  </layer>
- <layer name="interactives" width="50" height="50" visible="0">
+ <layer name="interactives" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OMQ0AAAgDsP3494uMQdIqaALAZdMOAAAAAAAAAAA8sa+JPBsQJwAA
+   H4sIAAAAAAAAA+3OMQ0AAAgDsL34N4yMQdIqaALAZdMOAAAAAAAAAAA8sd0KIcwQJwAA
   </data>
  </layer>
 </map>

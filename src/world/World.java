@@ -32,7 +32,8 @@ public class World {
         for(int j = 0; j < map.getHeight(); j++)
         {
           int id = map.getTileId(i, j, map.getLayerIndex("interactives"));
-          if(id != 0) {
+          if(id == 9) {
+            //System.out.println(id);
             EntityManager.player.setSpawn(i, j);
           }
         }
@@ -77,12 +78,22 @@ public class World {
       return false;
     }
     if(loadedMap > -1 && (map.getTileId(x, y, map.getLayerIndex("solids")) != 0)) {
-      //System.out.println("solid");
       return true;
     }
     return false;
   }
   
-  
+  public static boolean collision(int x, int y, int endx, int endy) {
+    for(int i = x; i <= endx; i++) {
+      for(int j = y; j <= endy; j++) {
+        if(isSolid(i,j)) {
+          return true;
+        }
+      }
+    }
+    
+    
+    return false;
+  }
   
 }

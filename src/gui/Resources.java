@@ -34,7 +34,9 @@ public class Resources {
     try {
       sprites.put("tileset", loadSprite("tilesheet.png",Tile.SIZE,Tile.SIZE));
       images.put("MapOverlay",loadImage("mapOverlay.png"));
+      images.put("Background", loadImage("background.png"));
       images.put("player",loadImage("player.png"));
+      images.put("menuPic", loadImage("menu.jpg"));
     } catch (SlickException ex) {
       System.out.println("FEHLER!");
       Logger.getLogger(Resources.class.getName()).log(Level.SEVERE, null, ex);
