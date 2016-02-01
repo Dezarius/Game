@@ -70,7 +70,10 @@ public class InGameMenuState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    //KeyboardOld.input(gc, s);
+    KeyboardOld.input(gc, s);
+    if(StateManager.currentstate != StateManager.INGAMEMENU) {
+        s.enterState(StateManager.currentstate);
+    }
   }
 
 }

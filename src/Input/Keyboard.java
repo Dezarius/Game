@@ -74,7 +74,7 @@ public class Keyboard implements Runnable {
     private void playerInput() {
         if(gc.getInput().isKeyPressed(Input.KEY_W)) {
             if(World.collision((int)(EntityManager.player.getX()+1 - World.mapX) / Tile.SIZE,(int) (EntityManager.player.getY()+33 - World.mapY) / Tile.SIZE,(int) (EntityManager.player.getX()+31-World.mapX) / Tile.SIZE,(int) (int) (EntityManager.player.getY()+ 33-World.mapY) / Tile.SIZE))
-                EntityManager.player.setY(-2);
+                EntityManager.player.setY(0);
                 EntityManager.player.setVelY(-6);
             }
             if(gc.getInput().isKeyDown(Input.KEY_D)) {
@@ -98,24 +98,20 @@ public class Keyboard implements Runnable {
     private void changeState() {
         //MENU -> GAME
     if(gc.getInput().isKeyPressed(Input.KEY_G) && StateManager.currentstate == StateManager.MENU) {
-      s.enterState(StateManager.GAME);
       StateManager.currentstate = StateManager.GAME;
     }
     else if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
       //INGAMEMENU -> GAME
       if(StateManager.currentstate == StateManager.INGAMEMENU) {
-        s.enterState(StateManager.GAME);
         StateManager.currentstate = StateManager.GAME;  
       }
       //GAME -> INGAMEMENU
       else if(StateManager.currentstate == StateManager.GAME) {
-        s.enterState(StateManager.INGAMEMENU);
         StateManager.currentstate = StateManager.INGAMEMENU;
       }
     }
     //INGAMEMENU -> MENU
     else if(gc.getInput().isKeyPressed(Input.KEY_M) && StateManager.currentstate == StateManager.INGAMEMENU) {
-      s.enterState(StateManager.MENU);
       StateManager.currentstate = StateManager.MENU;
     }
     }

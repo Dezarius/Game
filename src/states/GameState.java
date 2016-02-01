@@ -69,10 +69,13 @@ public class GameState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    //KeyboardOld.input(gc, s);
-    //KeyboardOld.changeMap(gc);
-    //KeyboardOld.playerInput(gc);
+    KeyboardOld.input(gc, s);
+    KeyboardOld.changeMap(gc);
+    KeyboardOld.playerInput(gc);
     EntityManager.player.move();
+    if(StateManager.currentstate != StateManager.GAME) {
+        s.enterState(StateManager.currentstate);
+    }
   }
 
 }

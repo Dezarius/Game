@@ -26,7 +26,6 @@ public class Player {
     y = 5.0f;
     velX = 0f;
     velY = 0f;
-    
   }
   
   public void move() {
