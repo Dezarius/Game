@@ -4,7 +4,7 @@
 
 package states;
 
-import Input.Keyboard;
+import Input.KeyboardOld;
 import gui.Resources;
 import gui.Window;
 import org.newdawn.slick.GameContainer;
@@ -21,6 +21,9 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 public class MenuState extends BasicGameState {
 
+    
+    public static StateBasedGame sbg;
+    
   /**
    * Returns the ID of the State
    * @return StateId
@@ -39,7 +42,7 @@ public class MenuState extends BasicGameState {
    */
   @Override
   public void init(GameContainer gc, StateBasedGame s) throws SlickException {
-    
+    sbg = s;
   }
 
   /**
@@ -66,7 +69,7 @@ public class MenuState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    Keyboard.input(gc, s);
+    //KeyboardOld.input(gc, s);
   }
 
 }

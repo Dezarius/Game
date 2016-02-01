@@ -5,17 +5,14 @@
 package states;
 
 import Entity.EntityManager;
-import Entity.Player;
-import Input.Keyboard;
+import Input.KeyboardOld;
 import gui.Resources;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import world.World;
-import world.WorldManager;
 
 /**
  * InGame-State
@@ -72,9 +69,9 @@ public class GameState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    Keyboard.input(gc, s);
-    Keyboard.changeMap(gc);
-    Keyboard.playerInput(gc);
+    //KeyboardOld.input(gc, s);
+    //KeyboardOld.changeMap(gc);
+    //KeyboardOld.playerInput(gc);
     EntityManager.player.move();
   }
 

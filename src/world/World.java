@@ -44,12 +44,20 @@ public class World {
     }
   }
   
+  public static int mapX = 50;
+  public static int mapY = 50;
+  //public static int velMapX
+  
   /**
    * Renders the current map
    */
   public static void renderCurrentMap(){
     if(map != null) {
-      map.render(0, 0, map.getLayerIndex("solids"));
+      if(WorldManager.movingMap) {
+        map.render(mapX, mapY, map.getLayerIndex("solids"));
+      } else {
+        map.render(0, 0, map.getLayerIndex("solids"));
+      }
     }
   }
   

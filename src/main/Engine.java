@@ -4,6 +4,7 @@
 
 package main;
 
+import Input.Keyboard;
 import gui.Resources;
 import gui.Window;
 import org.newdawn.slick.GameContainer;
@@ -16,6 +17,8 @@ import states.*;
  */
 public class Engine extends StateBasedGame{
   
+    
+    public static GameContainer gamec;
   
   /**
    * Creates a Window with the given Name
@@ -29,6 +32,7 @@ public class Engine extends StateBasedGame{
   @Override
   public void initStatesList(GameContainer gc) throws SlickException {
     //Some Framerate and logic stuff
+    gamec = gc;
     gc.setTargetFrameRate(60);
     gc.setAlwaysRender(true);
     gc.setMaximumLogicUpdateInterval(60);
@@ -37,6 +41,10 @@ public class Engine extends StateBasedGame{
     
     //loads all Recourses
     new Resources();
+    
+    //Keyboard
+    Thread keyboard = new Thread(new Keyboard());
+    keyboard.start();
     
     //adds all GameStates
     this.addState(new MenuState());

@@ -7,6 +7,7 @@ package Entity;
 import gui.Resources;
 import world.Tile;
 import world.World;
+import world.WorldManager;
 
 /**
  *
@@ -25,35 +26,81 @@ public class Player {
     y = 5.0f;
     velX = 0f;
     velY = 0f;
+    
   }
   
   public void move() {
     
-    if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY+ 32) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY + 32) / Tile.SIZE)) {
-      y = (y + velY) - ((y + velY) % Tile.SIZE);
-      velY = 0;
+      if(WorldManager.movingMap) {
+        //COLLISION UP/BOT
+        if(World.collision((int)(x+1 - World.mapX) / Tile.SIZE,(int) (y+velY+ 32 - World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+velY + 32-World.mapY) / Tile.SIZE)) {
+          while(!World.collision((int)(x+1 - World.mapX) / Tile.SIZE,(int) (y+33 - World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+ 33-World.mapY) / Tile.SIZE)) {
+            y++;
+          }
+//y = (y + velY) - ((y + velY) % Tile.SIZE);
+          velY = 0;
+        }
+        else if(World.collision((int)(x+1-World.mapX) / Tile.SIZE,(int) (y+velY-World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+velY-World.mapY) / Tile.SIZE)) {
+          while(!World.collision((int)(x+1-World.mapX) / Tile.SIZE,(int) (y-1-World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y-1-World.mapY) / Tile.SIZE)) {
+            y--;
+          }
+        //y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
+          velY = 0;
+        }
+        else {
+          velY = EntityManager.applyGravity(velY);
+          y = y + velY;
+        }
+        
+        
+        //COLLISION LEFT/RIGHT
+        if(World.collision((int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
+          while(!World.collision((int) (x -1 -World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x -1-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
+            x--;
+          } 
+          velX = 0;
+        }
+        else if(World.collision((int) (x + velX + 32-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + velX + 32 - World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
+          while(!World.collision((int) (x + 33-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + 33 - World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
+            x++;
+          } 
+          velX = 0;
+        }
+        else {
+          x = x + velX;
+        }
+      } 
+      
+      //WHEN MAP/KAMERA IS NOT MOVING
+      
+      //COLLISION BOT/UP
+      else {
+        if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY+ 32) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY + 32) / Tile.SIZE)) {
+          y = (y + velY) - ((y + velY) % Tile.SIZE);
+          velY = 0;
+        }
+        else if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY) / Tile.SIZE)) {
+          y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
+          velY = 0;
+        }
+        else {
+          velY = EntityManager.applyGravity(velY);
+          y = y + velY;
+      }
+        
+       //COLLISION LEFT/RIGHT
+      if(World.collision((int) (x + velX) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
+        x = (x + velX) + (Tile.SIZE - (x+velX) % Tile.SIZE);
+        velX = 0;
+      }
+      else if(World.collision((int) (x + velX + 32) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX + 32) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
+        x = (x + velX) - ((x+velX) % Tile.SIZE);
+        velX = 0;
+      }
+      else {
+        x = x + velX;
+      }
     }
-    else if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY) / Tile.SIZE)) {
-      y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
-      velY = 0;
-    }
-    else {
-      velY = EntityManager.applyGravity(velY);
-      y = y + velY;
-    }
-    
-    if(World.collision((int) (x + velX) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
-    x = (x + velX) + (Tile.SIZE - (x+velX) % Tile.SIZE);
-    velX = 0;
-    }
-    else if(World.collision((int) (x + velX + 32) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX + 32) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
-    x = (x + velX) - ((x+velX) % Tile.SIZE);
-    velX = 0;
-    }
-    else {
-      x = x + velX;
-    }
- 
   }
   
   public void moveX(boolean right) {
