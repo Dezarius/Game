@@ -31,6 +31,7 @@ public class KeyboardOld {
     else if(gc.getInput().isKeyPressed(Input.KEY_1)) {
       World.changeCurrentMap(1);
     }
+    
     if(gc.getInput().isKeyDown(Input.KEY_LEFT)) {
       World.mapX--;
     }
@@ -48,7 +49,7 @@ public class KeyboardOld {
   }
   
   public static void playerInput(GameContainer gc) {
-    if(gc.getInput().isKeyPressed(Input.KEY_W)) {
+    if(gc.getInput().isKeyPressed(Input.KEY_W) || gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
       if(World.collision((int)(EntityManager.player.getX()+1 - World.mapX) / Tile.SIZE,(int) (EntityManager.player.getY()+33 - World.mapY) / Tile.SIZE,(int) (EntityManager.player.getX()+31-World.mapX) / Tile.SIZE,(int) (int) (EntityManager.player.getY()+ 33-World.mapY) / Tile.SIZE))
         EntityManager.player.setY(-2);
       EntityManager.player.setVelY(-6);

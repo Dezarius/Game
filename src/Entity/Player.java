@@ -22,7 +22,7 @@ public class Player {
   private float velY;
   
   public Player(){
-    x = 5.0f;
+    x = 100.0f;
     y = 5.0f;
     velX = 0f;
     velY = 0f;
@@ -36,7 +36,7 @@ public class Player {
           while(!World.collision((int)(x+1 - World.mapX) / Tile.SIZE,(int) (y+33 - World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+ 33-World.mapY) / Tile.SIZE)) {
             y++;
           }
-//y = (y + velY) - ((y + velY) % Tile.SIZE);
+            //y = (y + velY) - ((y + velY) % Tile.SIZE);
           velY = 0;
         }
         else if(World.collision((int)(x+1-World.mapX) / Tile.SIZE,(int) (y+velY-World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+velY-World.mapY) / Tile.SIZE)) {
@@ -53,53 +53,22 @@ public class Player {
         
         
         //COLLISION LEFT/RIGHT
-        if(World.collision((int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
-          while(!World.collision((int) (x -1 -World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x -1-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
+        if(x + velX < -1 || World.collision((int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
+          while( x > 0 && !World.collision((int) (x -1 -World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x -1-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
             x--;
-          } 
+          }
           velX = 0;
         }
         else if(World.collision((int) (x + velX + 32-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + velX + 32 - World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
           while(!World.collision((int) (x + 33-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + 33 - World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
             x++;
-          } 
+          }
           velX = 0;
         }
         else {
           x = x + velX;
         }
       } 
-      
-      //WHEN MAP/KAMERA IS NOT MOVING
-      
-      //COLLISION BOT/UP
-      else {
-        if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY+ 32) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY + 32) / Tile.SIZE)) {
-          y = (y + velY) - ((y + velY) % Tile.SIZE);
-          velY = 0;
-        }
-        else if(World.collision((int)(x+1) / Tile.SIZE,(int) (y+velY) / Tile.SIZE,(int) (x+31) / Tile.SIZE,(int) (int) (y+velY) / Tile.SIZE)) {
-          y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
-          velY = 0;
-        }
-        else {
-          velY = EntityManager.applyGravity(velY);
-          y = y + velY;
-      }
-        
-       //COLLISION LEFT/RIGHT
-      if(World.collision((int) (x + velX) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
-        x = (x + velX) + (Tile.SIZE - (x+velX) % Tile.SIZE);
-        velX = 0;
-      }
-      else if(World.collision((int) (x + velX + 32) / Tile.SIZE, (int) (y + 1) / Tile.SIZE,(int) (x + velX + 32) / Tile.SIZE, (int) (y + 31) / Tile.SIZE)) {
-        x = (x + velX) - ((x+velX) % Tile.SIZE);
-        velX = 0;
-      }
-      else {
-        x = x + velX;
-      }
-    }
   }
   
   public void moveX(boolean right) {
@@ -107,7 +76,7 @@ public class Player {
       velX = velX + 0.2f;
     } else if(!right && velX > -5) {
       velX = velX - 0.2f;
-    }
+    } 
   }
   public void slowX() {
     if(velX < -0.2) {
@@ -145,10 +114,15 @@ public class Player {
     return y;
   }
   
+  public void setX(float dx) {
+      x = x + dx;
+  }
+  
+  
   public void setSpawn(float a, float b)
   {
-    this.x = a * Tile.SIZE;
-    this.y = b * Tile.SIZE;
+    this.x = a * Tile.SIZE + World.mapX;
+    this.y = b * Tile.SIZE + World.mapY;
     this.velX = 0;
     this.velY = 0;
   }  

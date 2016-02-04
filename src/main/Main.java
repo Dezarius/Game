@@ -19,7 +19,7 @@ public class Main{
   public static void main(String[] args){
     try{
       AppGameContainer app = new AppGameContainer(new Engine("Game"));
-      app.setDisplayMode(Window.WIDTH, Window.HEIGHT, false); // false == no fullscreen
+      app.setDisplayMode(Window.WWIDTH, Window.WHEIGHT, false); // false == no fullscreen
       app.start();
     }
     catch (SlickException ex){
