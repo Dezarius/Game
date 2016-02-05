@@ -4,7 +4,7 @@
 
 package main;
 
-import Input.Keyboard;
+import Input.KeyboardThreat;
 import gui.Resources;
 import gui.Window;
 import org.newdawn.slick.GameContainer;
@@ -34,7 +34,7 @@ public class Engine extends StateBasedGame{
     //Some Framerate and logic stuff
     gamec = gc;
     //Keyboard
-    Thread keyboard = new Thread(new Keyboard());
+    Thread keyboard = new Thread(new KeyboardThreat());
     //keyboard.start();
     gc.setTargetFrameRate(60);
     gc.setAlwaysRender(true);

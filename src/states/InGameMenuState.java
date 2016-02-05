@@ -5,7 +5,7 @@ package states;
  */
 
 import Entity.EntityManager;
-import Input.KeyboardOld;
+import Input.Keyboard;
 import gui.Resources;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -70,7 +70,7 @@ public class InGameMenuState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    KeyboardOld.input(gc, s);
+    Keyboard.input(gc, s);
     if(StateManager.currentstate != StateManager.INGAMEMENU) {
         s.enterState(StateManager.currentstate);
     }

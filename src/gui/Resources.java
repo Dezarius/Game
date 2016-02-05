@@ -37,6 +37,7 @@ public class Resources {
       images.put("Background", loadImage("background.png"));
       images.put("player",loadImage("player.png"));
       images.put("menuPic", loadImage("menu.jpg"));
+      images.put("direction", loadImage("Richtung.png"));
     } catch (SlickException ex) {
       System.out.println("FEHLER!");
       Logger.getLogger(Resources.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,7 +5,7 @@
 package states;
 
 import Entity.EntityManager;
-import Input.KeyboardOld;
+import Input.Keyboard;
 import gui.Resources;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -69,9 +69,9 @@ public class GameState extends BasicGameState {
    */
   @Override
   public void update(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
-    KeyboardOld.input(gc, s);
-    KeyboardOld.changeMap(gc);
-    KeyboardOld.playerInput(gc);
+    Keyboard.input(gc, s);
+    Keyboard.changeMap(gc);
+    Keyboard.playerInput(gc);
     EntityManager.player.move();
     if(StateManager.currentstate != StateManager.GAME) {
         s.enterState(StateManager.currentstate);

@@ -4,7 +4,10 @@
 
 package Entity;
 
+import Input.Mouse;
 import gui.Resources;
+import main.Engine;
+import main.Utilities;
 import world.Tile;
 import world.World;
 import world.WorldManager;
@@ -23,7 +26,7 @@ public class Player {
   
   public Player(){
     x = 100.0f;
-    y = 5.0f;
+    y = 100.0f;
     velX = 0f;
     velY = 0f;
   }
@@ -128,6 +131,16 @@ public class Player {
   }  
   public void draw() {
     Resources.getImage("player").draw(x,y);
+    Resources.getImage("direction").setCenterOfRotation(0, 1);
+    float[] position = Mouse.getPosition(Engine.gamec);
+    float angle = 0;
+    if(position[1] >= EntityManager.player.getY() + 15) {
+        angle = Utilities.AngleBetweenVectors(position[0] - x + 16,position[1] - y + 15, 1, 0);
+    }else {
+        angle = 360 - Utilities.AngleBetweenVectors(position[0] - x + 16,position[1] - y + 15, 1, 0);
+    }
+    Resources.getImage("direction").setRotation(angle);
+    Resources.getImage("direction").draw(x+16,y+15);  
   }
   
 }
