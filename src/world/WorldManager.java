@@ -14,6 +14,5 @@ public class WorldManager {
                                        "/level1.tmx"   //1         
   };
   
-  public static final boolean movingMap = true;
   
 }

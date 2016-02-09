@@ -4,12 +4,13 @@
 
 package gui;
 
+import Config.Config;
+
 /**
  * Momentan sehr redundant
  * 
  */
 public class Window {
-  public static int WWIDTH = 1280;
-  public static int WHEIGHT = 720;
-  
+  public static int WWIDTH = Config.WindowWidth;
+  public static int WHEIGHT = Config.WindowHeight;
 }

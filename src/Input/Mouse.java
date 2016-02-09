@@ -3,6 +3,7 @@
  */
 package Input;
 
+import main.Engine;
 import org.newdawn.slick.GameContainer;
 
 /**
@@ -12,8 +13,8 @@ import org.newdawn.slick.GameContainer;
 public class Mouse {
     
     
-    public static float[] getPosition(GameContainer gc) {
-        float[] mouse = {gc.getInput().getMouseX(), gc.getInput().getMouseY()};
+    public static float[] getPosition() {
+        float[] mouse = {Engine.gamec.getInput().getMouseX(), Engine.gamec.getInput().getMouseY()};
         return mouse;
     }
     

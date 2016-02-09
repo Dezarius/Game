@@ -6,10 +6,8 @@ package states;
 
 import Input.Keyboard;
 import gui.Resources;
-import gui.Window;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -55,7 +53,7 @@ public class MenuState extends BasicGameState {
    */
   @Override
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
-    Resources.getImage("menuPic").draw();
+    Resources.getImage("menuPic").draw(-1,-1,0.801f);
     g.drawString("Menu", 50, 50);
   }
 

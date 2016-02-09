@@ -4,13 +4,13 @@
 
 package Entity;
 
+import Config.Config;
 import Input.Mouse;
 import gui.Resources;
-import main.Engine;
 import main.Utilities;
+import states.StateManager;
 import world.Tile;
 import world.World;
-import world.WorldManager;
 
 /**
  *
@@ -32,60 +32,53 @@ public class Player {
   }
   
   public void move() {
-    
-      if(WorldManager.movingMap) {
-        //COLLISION UP/BOT
-        if(World.collision((int)(x+1 - World.mapX) / Tile.SIZE,(int) (y+velY+ 32 - World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+velY + 32-World.mapY) / Tile.SIZE)) {
-          while(!World.collision((int)(x+1 - World.mapX) / Tile.SIZE,(int) (y+33 - World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+ 33-World.mapY) / Tile.SIZE)) {
-            y++;
+
+      //COLLISION UP/BOT
+      if (World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y + velY + Config.PHeight - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y + velY + Config.PHeight - World.mapY) / Tile.SIZE)) {
+          while (!World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight + 1 - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y + Config.PHeight + 1 - World.mapY) / Tile.SIZE)) {
+              y++;
           }
-            //y = (y + velY) - ((y + velY) % Tile.SIZE);
+          //y = (y + velY) - ((y + velY) % Tile.SIZE);
           velY = 0;
-        }
-        else if(World.collision((int)(x+1-World.mapX) / Tile.SIZE,(int) (y+velY-World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y+velY-World.mapY) / Tile.SIZE)) {
-          while(!World.collision((int)(x+1-World.mapX) / Tile.SIZE,(int) (y-1-World.mapY) / Tile.SIZE,(int) (x+31-World.mapX) / Tile.SIZE,(int) (int) (y-1-World.mapY) / Tile.SIZE)) {
-            y--;
+      } else if (World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y + velY - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y + velY - World.mapY) / Tile.SIZE)) {
+          while (!World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y - 1 - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y - 1 - World.mapY) / Tile.SIZE)) {
+              y--;
           }
-        //y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
+          //y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
           velY = 0;
-        }
-        else {
+      } else {
           velY = EntityManager.applyGravity(velY);
           y = y + velY;
-        }
-        
-        
-        //COLLISION LEFT/RIGHT
-        if(x + velX < -1 || World.collision((int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + velX-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
-          while( x > 0 && !World.collision((int) (x -1 -World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x -1-World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
-            x--;
+      }
+
+      //COLLISION LEFT/RIGHT
+      if (x + velX < -1 || World.collision((int) (x + velX - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x + velX - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
+          while (x > 0 && !World.collision((int) (x - 1 - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x - 1 - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
+              x--;
           }
           velX = 0;
-        }
-        else if(World.collision((int) (x + velX + 32-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + velX + 32 - World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
-          while(!World.collision((int) (x + 33-World.mapX) / Tile.SIZE, (int) (y + 1-World.mapY) / Tile.SIZE,(int) (x + 33 - World.mapX) / Tile.SIZE, (int) (y + 31-World.mapY) / Tile.SIZE)) {
-            x++;
+      } else if (World.collision((int) (x + velX + Config.PWidth - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x + velX + Config.PWidth - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
+          while (!World.collision((int) (x + Config.PWidth + 1 - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth + 1 - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
+              x++;
           }
           velX = 0;
-        }
-        else {
+      } else {
           x = x + velX;
-        }
-      } 
+      }
   }
   
   public void moveX(boolean right) {
     if(right && velX < 5) {
-      velX = velX + 0.2f;
+      velX = velX + Config.PMoveSpeed;
     } else if(!right && velX > -5) {
-      velX = velX - 0.2f;
+      velX = velX - Config.PMoveSpeed;
     } 
   }
   public void slowX() {
-    if(velX < -0.2) {
-      velX = velX + 0.2f;
-    } else if(velX > 0.2) {
-      velX = velX - 0.2f;
+    if(velX < - Config.PSlowSpeed) {
+      velX = velX + Config.PSlowSpeed;
+    } else if(velX > Config.PSlowSpeed) {
+      velX = velX - Config.PSlowSpeed;
     }
     else {
       velX = 0;
@@ -128,19 +121,21 @@ public class Player {
     this.y = b * Tile.SIZE + World.mapY;
     this.velX = 0;
     this.velY = 0;
-  }  
+  }
+  private float angle = 0;
   public void draw() {
     Resources.getImage("player").draw(x,y);
     Resources.getImage("direction").setCenterOfRotation(0, 1);
-    float[] position = Mouse.getPosition(Engine.gamec);
-    float angle = 0;
-    if(position[1] >= EntityManager.player.getY() + 15) {
-        angle = Utilities.AngleBetweenVectors(position[0] - x + 16,position[1] - y + 15, 1, 0);
-    }else {
-        angle = 360 - Utilities.AngleBetweenVectors(position[0] - x + 16,position[1] - y + 15, 1, 0);
+    float[] position = Mouse.getPosition();
+    if(StateManager.currentstate == StateManager.GAME) {
+        if(position[1] >= EntityManager.player.getY() + Config.PHeight / 2) {
+            angle = Utilities.AngleBetweenVectors(position[0]-(x + Config.PWidth / 2),position[1]-(y +Config.PHeight / 2), 1, 0);
+        }else {
+            angle = 360 - Utilities.AngleBetweenVectors(position[0]-(x + Config.PWidth / 2),position[1]-(y +Config.PHeight / 2), 1, 0  );
+        }
     }
     Resources.getImage("direction").setRotation(angle);
-    Resources.getImage("direction").draw(x+16,y+15);  
+    Resources.getImage("direction").draw(x+ Config.PWidth / 2,y + Config.PHeight / 2);  
   }
   
 }

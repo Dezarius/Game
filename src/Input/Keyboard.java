@@ -1,9 +1,9 @@
 /*
  * © 2015 Jan Abelmann
  */
-
 package Input;
 
+import Config.Config;
 import Entity.EntityManager;
 import gui.Resources;
 import main.Utilities;
@@ -17,93 +17,81 @@ import world.World;
 
 /**
  *
- * 
+ *
  */
 public class Keyboard {
-  
-  public static void input(GameContainer gc,StateBasedGame s) {
-    changeState(gc,s);
 
-  }
-  
-  public static void changeMap(GameContainer gc) throws SlickException {
-    if(gc.getInput().isKeyPressed(Input.KEY_0)) {
-      World.changeCurrentMap(0);
+    public static void input(GameContainer gc, StateBasedGame s) {
+        changeState(gc, s);
     }
-    else if(gc.getInput().isKeyPressed(Input.KEY_1)) {
-      World.changeCurrentMap(1);
-    }
-    
-    if(gc.getInput().isKeyDown(Input.KEY_LEFT)) {
-      World.mapX--;
-    }
-    if(gc.getInput().isKeyDown(Input.KEY_RIGHT)) {
-      World.mapX++;
-    }
-    if(gc.getInput().isKeyDown(Input.KEY_UP)) {
-      World.mapY--;
-    }
-    if(gc.getInput().isKeyDown(Input.KEY_DOWN)) {
-      World.mapY++;
-    }
-    
-    
-  }
-  static boolean temp;
-  
-  public static void playerInput(GameContainer gc) {
-    if(gc.getInput().isKeyPressed(Input.KEY_H)) {
-        Mouse.getPosition(gc);
-    }
-    if(gc.getInput().isKeyDown(Input.KEY_I)) {
 
+    public static void changeMap(GameContainer gc) throws SlickException {
+        if (gc.getInput().isKeyPressed(Input.KEY_0)) {
+            World.changeCurrentMap(0);
+        } else if (gc.getInput().isKeyPressed(Input.KEY_1)) {
+            World.changeCurrentMap(1);
+        }
     }
-    if(gc.getInput().isKeyPressed(Input.KEY_W) || gc.getInput().isKeyPressed(Input.KEY_SPACE)) {
-      if(World.collision((int)(EntityManager.player.getX()+1 - World.mapX) / Tile.SIZE,(int) (EntityManager.player.getY()+33 - World.mapY) / Tile.SIZE,(int) (EntityManager.player.getX()+31-World.mapX) / Tile.SIZE,(int) (int) (EntityManager.player.getY()+ 33-World.mapY) / Tile.SIZE))
-        EntityManager.player.setY(-2);
-      EntityManager.player.setVelY(-6);
+
+    private static int jumpCounter = 0;
+
+    public static void playerInput(GameContainer gc) {
+        if (StateManager.currentstate == StateManager.GAME) {
+            if (gc.getInput().isKeyPressed(Input.KEY_H)) {
+                float[] pos = Mouse.getPosition();
+                System.out.println("Maus: " + pos[0] + "|" + pos[1]);
+                System.out.println("Spieler: " + EntityManager.player.getX() + "|" + EntityManager.player.getY());
+                System.out.println("Winkel: " + Utilities.angle);
+            }
+            if (gc.getInput().isKeyPressed(Config.PUp) || gc.getInput().isKeyPressed(Config.PUp2)) {
+                if (World.collision((int) (EntityManager.player.getX() + 1 - World.mapX) / Tile.SIZE, (int) (EntityManager.player.getY() + Config.PHeight + 1 - World.mapY) / Tile.SIZE, (int) (EntityManager.player.getX() + Config.PWidth-1 - World.mapX) / Tile.SIZE, (int) (int) (EntityManager.player.getY() + Config.PHeight + 1 - World.mapY) / Tile.SIZE)) {
+                    EntityManager.player.setY(-2);
+                    jumpCounter = 0;
+                }
+                if (jumpCounter < Config.AmountOFJumps) {
+                    jumpCounter++;
+                    EntityManager.player.setVelY(-Config.JumpHeight);
+                    EntityManager.firstGravity = true;
+                }
+            }
+            if (gc.getInput().isKeyDown(Config.PRight)) {
+                EntityManager.player.moveX(true);
+            } else if (gc.getInput().isKeyDown(Config.PLeft)) {
+                EntityManager.player.moveX(false);
+            } else {
+                int mapx = World.mapX;
+                int mapy = World.mapY;
+                if (World.collision((int) (EntityManager.player.getX() - mapx) / Tile.SIZE,
+                        (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1,
+                        (int) (EntityManager.player.getX() - mapx) / Tile.SIZE + 1,
+                        (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1)) {
+                    EntityManager.player.slowX();
+                }
+            }
+        }
     }
-    if(gc.getInput().isKeyDown(Input.KEY_D)) {
-      EntityManager.player.moveX(true);
+
+    private static void changeState(GameContainer gc, StateBasedGame s) {
+        //MENU -> GAME
+        if (gc.getInput().isKeyPressed(Config.StateGame) && StateManager.currentstate == StateManager.MENU) {
+            s.enterState(StateManager.GAME);
+            StateManager.currentstate = StateManager.GAME;
+        } else if (gc.getInput().isKeyPressed(Config.StateInGameMenu)) {
+            //INGAMEMENU -> GAME
+            if (StateManager.currentstate == StateManager.INGAMEMENU) {
+                gc.getInput().clearKeyPressedRecord();
+                s.enterState(StateManager.GAME);
+                StateManager.currentstate = StateManager.GAME;
+            } //GAME -> INGAMEMENU
+            else if (StateManager.currentstate == StateManager.GAME) {
+                s.enterState(StateManager.INGAMEMENU);
+                StateManager.currentstate = StateManager.INGAMEMENU;
+            }
+        } //INGAMEMENU -> MENU
+        else if (gc.getInput().isKeyPressed(Config.StateMenu) && StateManager.currentstate == StateManager.INGAMEMENU) {
+            s.enterState(StateManager.MENU);
+            StateManager.currentstate = StateManager.MENU;
+        }
     }
-    else if(gc.getInput().isKeyDown(Input.KEY_A)) {
-      EntityManager.player.moveX(false);
-    } 
-    else{
-      int mapx = World.mapX;
-      int mapy = World.mapY;
-      if(World.collision( (int) (EntityManager.player.getX() - mapx) / Tile.SIZE,
-              (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1 ,
-              (int) (EntityManager.player.getX() - mapx) / Tile.SIZE + 1,
-              (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1 )) {
-        EntityManager.player.slowX();
-      }
-    }
-  }
-  
-  private static void changeState(GameContainer gc,StateBasedGame s) {
-    //MENU -> GAME
-    if(gc.getInput().isKeyPressed(Input.KEY_G) && StateManager.currentstate == StateManager.MENU) {
-      s.enterState(StateManager.GAME);
-      StateManager.currentstate = StateManager.GAME;
-    }
-    else if(gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-      //INGAMEMENU -> GAME
-      if(StateManager.currentstate == StateManager.INGAMEMENU) {
-        s.enterState(StateManager.GAME);
-        StateManager.currentstate = StateManager.GAME;  
-      }
-      //GAME -> INGAMEMENU
-      else if(StateManager.currentstate == StateManager.GAME) {
-        s.enterState(StateManager.INGAMEMENU);
-        StateManager.currentstate = StateManager.INGAMEMENU;
-      }
-    }
-    //INGAMEMENU -> MENU
-    else if(gc.getInput().isKeyPressed(Input.KEY_M) && StateManager.currentstate == StateManager.INGAMEMENU) {
-      s.enterState(StateManager.MENU);
-      StateManager.currentstate = StateManager.MENU;
-    }
-  }
-  
+
 }

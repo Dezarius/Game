@@ -4,9 +4,8 @@
 
 package main;
 
-import Input.KeyboardThreat;
+import Config.Config;
 import gui.Resources;
-import gui.Window;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -34,13 +33,13 @@ public class Engine extends StateBasedGame{
     //Some Framerate and logic stuff
     gamec = gc;
     //Keyboard
-    Thread keyboard = new Thread(new KeyboardThreat());
+    //Thread keyboard = new Thread(new KeyboardThreat());
     //keyboard.start();
-    gc.setTargetFrameRate(60);
+    gc.setTargetFrameRate(Config.Framerate);
     gc.setAlwaysRender(true);
-    gc.setMaximumLogicUpdateInterval(60);
-    gc.setVSync(true);
-    gc.setShowFPS(true);
+    gc.setMaximumLogicUpdateInterval(Config.LogicRate);
+    gc.setVSync(Config.VSync);
+    gc.setShowFPS(Config.showFPS);
     
     //loads all Recourses
     new Resources();
