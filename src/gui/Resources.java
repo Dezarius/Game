@@ -43,6 +43,7 @@ public class Resources {
       images.put("player",loadImage("player.png"));
       images.put("menuPic", loadImage("menu.png"));
       images.put("direction", loadImage("Richtung.png"));
+      images.put("Bullet_Pistol", loadImage("Bullet_Pistol.png"));
     } catch (SlickException ex) {
       System.out.println("FEHLER beim Laden der Resources. Eine gelöscht?!?");
       Logger.getLogger(Resources.class.getName()).log(Level.SEVERE, null, ex);

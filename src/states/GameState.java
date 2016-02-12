@@ -4,8 +4,10 @@
 
 package states;
 
+import Bullets.BulletManager;
 import Entity.EntityManager;
 import Input.Keyboard;
+import Input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -54,6 +56,8 @@ public class GameState extends BasicGameState {
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
     World.renderCurrentMap();
     EntityManager.player.draw();
+    if(BulletManager.b != null)
+        BulletManager.b.draw();
     g.drawString("Game", 50, 50);
   }
   
@@ -70,6 +74,9 @@ public class GameState extends BasicGameState {
     Keyboard.input(gc, s);
     Keyboard.changeMap(gc);
     Keyboard.playerInput(gc);
+    Mouse.Input();
+    if(BulletManager.b != null)
+        BulletManager.b.move();
     EntityManager.player.move();
     if(StateManager.currentstate != StateManager.GAME) {
         s.enterState(StateManager.currentstate);

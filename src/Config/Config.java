@@ -36,7 +36,7 @@ public class Config {
     public static float GravityRate = 0.002f;
 
     //Window
-    public static boolean Fullscreen = true;
+    public static boolean Fullscreen = false;
     public static int WindowWidth = 1280;
     public static int WindowHeight = 720;
     public static int Framerate = 60;
@@ -50,4 +50,7 @@ public class Config {
     public static float BackgroundX = 200;
     public static float BackgroundY = 100;
     
+    //Bullets
+    public static float Bullet_PistolSpeed = 15f;
+    public static float Bullet_PistolScale = 1.6f;
 }
