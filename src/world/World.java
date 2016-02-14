@@ -3,6 +3,7 @@
  */
 package world;
 
+import Bullets.BulletManager;
 import Config.Config;
 import Entity.EntityManager;
 import gui.Resources;
@@ -118,6 +119,7 @@ public class World {
             loadedMap = -1;
             loadMap(MapID);
             loadedMap = MapID;
+            BulletManager.deleteBullets();
         }
     }
 

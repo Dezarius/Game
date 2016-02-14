@@ -3,6 +3,7 @@
  */
 package Input;
 
+import Bullets.BulletManager;
 import Config.Config;
 import Entity.EntityManager;
 import gui.Resources;
@@ -23,6 +24,9 @@ public class Keyboard {
 
     public static void input(GameContainer gc, StateBasedGame s) {
         changeState(gc, s);
+        if (gc.getInput().isKeyPressed(Input.KEY_I)) {
+            System.out.println(BulletManager.returnSize());
+        }
     }
 
     public static void changeMap(GameContainer gc) throws SlickException {

@@ -56,8 +56,7 @@ public class GameState extends BasicGameState {
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
     World.renderCurrentMap();
     EntityManager.player.draw();
-    if(BulletManager.b != null)
-        BulletManager.b.draw();
+    BulletManager.draw();
     g.drawString("Game", 50, 50);
   }
   
@@ -75,8 +74,7 @@ public class GameState extends BasicGameState {
     Keyboard.changeMap(gc);
     Keyboard.playerInput(gc);
     Mouse.Input();
-    if(BulletManager.b != null)
-        BulletManager.b.move();
+    BulletManager.update();
     EntityManager.player.move();
     if(StateManager.currentstate != StateManager.GAME) {
         s.enterState(StateManager.currentstate);
