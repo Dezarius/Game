@@ -14,5 +14,5 @@ public class Utilities {
         angle = (float) (( 360/(2* Math.PI)) *  Math.acos( ( x1*x2+y1*y2)/(Math.sqrt(x1*x1+y1*y1) * Math.sqrt(x2*x2+y2*y2)) ));
         return angle;
     }
-  
+    
 }

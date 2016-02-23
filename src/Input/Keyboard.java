@@ -7,6 +7,7 @@ import Bullets.BulletManager;
 import Config.Config;
 import Entity.EntityManager;
 import gui.Resources;
+import main.Debug;
 import main.Utilities;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -24,8 +25,8 @@ public class Keyboard {
 
     public static void input(GameContainer gc, StateBasedGame s) {
         changeState(gc, s);
-        if (gc.getInput().isKeyPressed(Input.KEY_I)) {
-            System.out.println(BulletManager.returnSize());
+        if (gc.getInput().isKeyPressed(Config.Debug)) {
+            Debug.toggleDebug();
         }
     }
 

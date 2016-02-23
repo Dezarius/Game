@@ -7,6 +7,7 @@ package states;
 import Entity.EntityManager;
 import Input.Keyboard;
 import gui.Resources;
+import main.Debug;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -55,6 +56,7 @@ public class InGameMenuState extends BasicGameState {
     World.renderCurrentMap();
     EntityManager.player.draw();
     Resources.getImage("MapOverlay").draw(0, 0);
+    Debug.render(gc,s,g);
     g.drawString("InGameMenu", 50, 50);
     
   }

@@ -29,6 +29,7 @@ public class Config {
     public static int StateGame = Input.KEY_G;
     public static int StateMenu = Input.KEY_M;
     public static int StateInGameMenu = Input.KEY_ESCAPE;
+    public static int Debug = Input.KEY_F3;
     
     //Gravity
     public static float Gravity = 0.1f;

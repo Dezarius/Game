@@ -8,6 +8,7 @@ import Bullets.BulletManager;
 import Entity.EntityManager;
 import Input.Keyboard;
 import Input.Mouse;
+import main.Debug;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -57,6 +58,7 @@ public class GameState extends BasicGameState {
     World.renderCurrentMap();
     EntityManager.player.draw();
     BulletManager.draw();
+    Debug.render(gc,s,g);
     g.drawString("Game", 50, 50);
   }
   
@@ -76,6 +78,7 @@ public class GameState extends BasicGameState {
     Mouse.Input();
     BulletManager.update();
     EntityManager.player.move();
+    Debug.update();
     if(StateManager.currentstate != StateManager.GAME) {
         s.enterState(StateManager.currentstate);
     }

@@ -7,6 +7,7 @@ package Entity;
 import Config.Config;
 import Input.Mouse;
 import gui.Resources;
+import main.Debug;
 import main.Utilities;
 import states.StateManager;
 import world.Tile;
@@ -123,18 +124,14 @@ public class Player {
     this.velY = 0;
   }
   public void draw() {
-    Resources.getImage("player").draw(x,y);
-    Resources.getImage("direction").setCenterOfRotation(0, 1);
-
-    Resources.getImage("direction").setRotation(getAngle());
-    Resources.getImage("direction").draw(x+ Config.PWidth / 2,y + Config.PHeight / 2);  
+    Resources.getImage("player").draw(x,y);Resources.getImage("direction").setCenterOfRotation(0, 1);
   }
   
   public float getAngle() {
       float angle = 0;
       float[] position = Mouse.getPosition();
       if (StateManager.currentstate == StateManager.GAME) {
-          if (position[1] >= EntityManager.player.getY() + Config.PHeight / 2) {
+          if (position[1] >= y + Config.PHeight / 2) {
               angle = Utilities.AngleBetweenVectors(position[0] - (x + Config.PWidth / 2), position[1] - (y + Config.PHeight / 2), 1, 0);
           } else {
               angle = 360 - Utilities.AngleBetweenVectors(position[0] - (x + Config.PWidth / 2), position[1] - (y + Config.PHeight / 2), 1, 0);
