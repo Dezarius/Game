@@ -82,14 +82,13 @@ public class KeyboardThreat implements Runnable {
             }
             else if(gc.getInput().isKeyDown(Input.KEY_A)) {
                 EntityManager.player.moveX(false);
-            } 
-        else{
-            int mapx = World.mapX;
-                int mapy = World.mapY;
-                if(World.collision( (int) (EntityManager.player.getX() - mapx) / Tile.SIZE,
-                    (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1 ,
+        } else {
+            float mapx = World.mapX;
+            float mapy = World.mapY;
+            if (World.collision((int) (EntityManager.player.getX() - mapx) / Tile.SIZE,
+                    (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1,
                     (int) (EntityManager.player.getX() - mapx) / Tile.SIZE + 1,
-                    (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1 )) {
+                    (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1)) {
                 EntityManager.player.slowX();
             }
         }

@@ -39,7 +39,7 @@ public class Engine extends StateBasedGame{
     gc.setAlwaysRender(true);
     gc.setMaximumLogicUpdateInterval(Config.LogicRate);
     gc.setVSync(Config.VSync);
-    gc.setShowFPS(Config.showFPS);
+    gc.setShowFPS(false);
     
     //loads all Recourses
     new Resources();

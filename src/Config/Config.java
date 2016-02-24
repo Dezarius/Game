@@ -43,7 +43,6 @@ public class Config {
     public static int Framerate = 60;
     public static int LogicRate = 60;
     public static boolean VSync = true;
-    public static boolean showFPS = true;
  
     //World
     public static float BackgroundMovement = 0.2f;

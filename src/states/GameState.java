@@ -59,7 +59,7 @@ public class GameState extends BasicGameState {
     EntityManager.player.draw();
     BulletManager.draw();
     Debug.render(gc,s,g);
-    g.drawString("Game", 50, 50);
+    //g.drawString("Game", 50, 50);
   }
   
   /**

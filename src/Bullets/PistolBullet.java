@@ -5,6 +5,7 @@ package Bullets;
 
 import Config.Config;
 import gui.Resources;
+import world.World;
 
 /**
  *
@@ -18,7 +19,7 @@ public class PistolBullet extends Bullet {
 
     public void draw() {
         Resources.getImage("Bullet_Pistol").setRotation(this.getAngle());
-        Resources.getImage("Bullet_Pistol").draw(this.getX(),this.getY(),Config.Bullet_PistolScale);
+        Resources.getImage("Bullet_Pistol").draw(this.getX() + World.mapX ,this.getY() + World.mapY,Config.Bullet_PistolScale);
     }
     
 }

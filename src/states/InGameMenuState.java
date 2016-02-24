@@ -57,7 +57,7 @@ public class InGameMenuState extends BasicGameState {
     EntityManager.player.draw();
     Resources.getImage("MapOverlay").draw(0, 0);
     Debug.render(gc,s,g);
-    g.drawString("InGameMenu", 50, 50);
+    //g.drawString("InGameMenu", 50, 50);
     
   }
 

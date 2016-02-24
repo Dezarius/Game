@@ -33,8 +33,8 @@ public class BulletManager {
         List removeList = new ArrayList();
         for (Object o : bullets) {
             Bullet b = (Bullet) o;
-            if(b.getX() > 10 && b.getX() < Config.WindowWidth - 10 && b.getY() > 10 && b.getY() < Config.WindowHeight - 10) {
-                if(!World.collision(((int) b.getX() - 6 - World.mapX) / Tile.SIZE, ((int) b.getY() -6 -  World.mapY) / Tile.SIZE, ((int) b.getX() + 6 - World.mapX)/ Tile.SIZE, ((int) b.getY() + 6 - World.mapY)/ Tile.SIZE)) {
+            if(b.getX() + World.mapX > 10 && b.getX() + World.mapX < Config.WindowWidth - 10 && b.getY()  + World.mapY > 10 && b.getY() + World.mapY < Config.WindowHeight - 10) {
+                if(!World.collision(((int) b.nextX()) / Tile.SIZE, ((int) b.nextY()) / Tile.SIZE, ((int) b.nextX() + 4)/ Tile.SIZE, ((int) b.nextY() + 4)/ Tile.SIZE)) {
                     b.move();
                 }
                 else {

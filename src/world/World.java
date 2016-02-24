@@ -56,56 +56,38 @@ public class World {
     public static void renderCurrentMap() {
         Resources.getImage("Background6").draw(mapX * Config.BackgroundMovement - Config.BackgroundX, mapY * Config.BackgroundMovement - Config.BackgroundY, Config.BackgroundScale);
         if (map != null) {
-            //Kamerabewegung nach links
             if (StateManager.currentstate == StateManager.GAME) {
-                if (mapX < -6 && EntityManager.player.getX() < Window.WWIDTH / 2 - 110 && EntityManager.player.getVelX() != 0) {
+                //Kamerabewegung links
+                if(mapX < -6 && EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - 110) {
                     mapX = mapX - (int) EntityManager.player.getVelX();
-                    EntityManager.player.setX(-EntityManager.player.getVelX());
-                } else if (mapX < -6 && EntityManager.player.getX() < Window.WWIDTH / 2 - 110) {
-                    if (EntityManager.player.getX() < 0) {
-                        mapX += 16;
-                        EntityManager.player.setX(16);
-                    }
-                    mapX += 4;
-                    EntityManager.player.setX(4);
-                } //Kamerabeweung nach rechts
-                else if (mapX + World.map.getWidth() * 32 - 6 > Window.WWIDTH && EntityManager.player.getX() > Window.WWIDTH / 2 + 80 && EntityManager.player.getVelX() != 0) {
-                    mapX = mapX - (int) EntityManager.player.getVelX();
-                    EntityManager.player.setX(-EntityManager.player.getVelX());
-                } else if (mapX + World.map.getWidth() * 32 - 6 > Window.WWIDTH && EntityManager.player.getX() > Window.WWIDTH / 2 + 80) {
-                    if (EntityManager.player.getX() > 1280) {
-                        mapX -= 16;
-                        EntityManager.player.setX(-16);
-                    }
-                    mapX -= 4;
-                    EntityManager.player.setX(-4);
+                    if(EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - 110)
+                        EntityManager.player.setX(1 - EntityManager.player.getX() % 1);
+                }
+                //Kamerabewegung rechts
+                else if(mapX + World.map.getWidth() * 32 - 6 > Window.WWIDTH && EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + 80) {
+                    mapX = mapX - (int) (EntityManager.player.getVelX());
+                    if(EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + 80)
+                        EntityManager.player.setX(- EntityManager.player.getX() % 1);
+                }
+                
+                //Kamerabewegung oben
+                if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - 100 && EntityManager.player.getVelY() != 0) {
+                    mapY = mapY - (int) EntityManager.player.getVelY();
+                }
+                else if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - 100) {
+                    mapY += 5;
+                }
+                //Kamerabewegung unten
+                else if(mapY + World.map.getHeight() * 32 - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + 100 && EntityManager.player.getVelY() != 0) {
+                    mapY = mapY - (int) EntityManager.player.getVelY();
+                }
+                else if(mapY + World.map.getHeight() * 32 - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + 100) {
+                    mapY -= 5;
                 }
 
-                //Kamerabewegung nach oben
-                if (mapY < -6 && EntityManager.player.getY() < Window.WHEIGHT / 2 - 100 && EntityManager.player.getVelY() != 0) {
-                    mapY = mapY - (int) EntityManager.player.getVelY();
-                    EntityManager.player.setY(-EntityManager.player.getVelY());
-                } else if (mapY < -6 && EntityManager.player.getY() < Window.WHEIGHT / 2 - 100) {
-                    if (EntityManager.player.getY() < 0) {
-                        mapY += 16;
-                        EntityManager.player.setY(16);
-                    }
-                    mapY += 5;
-                    EntityManager.player.setY(5);
-                } //Kamerabewegung nach unten
-                else if (mapY + World.map.getHeight() * 32 - 6 > Window.WHEIGHT && EntityManager.player.getY() > Window.WHEIGHT / 2 + 100 && EntityManager.player.getVelY() != 0) {
-                    mapY = mapY - (int) EntityManager.player.getVelY();
-                    EntityManager.player.setY(-EntityManager.player.getVelY());
-                } else if (mapY + World.map.getHeight() * 32 - 6 > Window.WHEIGHT && EntityManager.player.getY() > Window.WHEIGHT / 2 + 100) {
-                    if (EntityManager.player.getY() > 720) {
-                        mapY -= 16;
-                        EntityManager.player.setY(-16);
-                    }
-                    mapY -= 5;
-                    EntityManager.player.setY(-5);
-                }
+                
             }
-            map.render(mapX, mapY, map.getLayerIndex("solids"));
+            map.render((int)mapX, (int) mapY, map.getLayerIndex("solids")); 
         }
     }
 

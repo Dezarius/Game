@@ -49,7 +49,7 @@ public class Keyboard {
                 System.out.println("Winkel: " + Utilities.angle);
             }
             if (gc.getInput().isKeyPressed(Config.PUp) || gc.getInput().isKeyPressed(Config.PUp2)) {
-                if (World.collision((int) (EntityManager.player.getX() + 1 - World.mapX) / Tile.SIZE, (int) (EntityManager.player.getY() + Config.PHeight + 1 - World.mapY) / Tile.SIZE, (int) (EntityManager.player.getX() + Config.PWidth-1 - World.mapX) / Tile.SIZE, (int) (int) (EntityManager.player.getY() + Config.PHeight + 1 - World.mapY) / Tile.SIZE)) {
+                if (World.collision((int) (EntityManager.player.getX() + 1) / Tile.SIZE, (int) (EntityManager.player.getY() + Config.PHeight + 1) / Tile.SIZE, (int) (EntityManager.player.getX() + Config.PWidth-1) / Tile.SIZE, (int) (int) (EntityManager.player.getY() + Config.PHeight + 1) / Tile.SIZE)) {
                     EntityManager.player.setY(-2);
                     jumpCounter = 0;
                 }
@@ -64,12 +64,10 @@ public class Keyboard {
             } else if (gc.getInput().isKeyDown(Config.PLeft)) {
                 EntityManager.player.moveX(false);
             } else {
-                int mapx = World.mapX;
-                int mapy = World.mapY;
-                if (World.collision((int) (EntityManager.player.getX() - mapx) / Tile.SIZE,
-                        (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1,
-                        (int) (EntityManager.player.getX() - mapx) / Tile.SIZE + 1,
-                        (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1)) {
+                if (World.collision((int) (EntityManager.player.getX()) / Tile.SIZE,
+                        (int) (EntityManager.player.getY() + EntityManager.player.getVelY()) / Tile.SIZE + 1,
+                        (int) (EntityManager.player.getX()) / Tile.SIZE + 1,
+                        (int) (EntityManager.player.getY() + EntityManager.player.getVelY()) / Tile.SIZE + 1)) {
                     EntityManager.player.slowX();
                 }
             }

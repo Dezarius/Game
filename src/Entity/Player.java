@@ -35,14 +35,14 @@ public class Player {
   public void move() {
 
       //COLLISION UP/BOT
-      if (World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y + velY + Config.PHeight - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y + velY + Config.PHeight - World.mapY) / Tile.SIZE)) {
-          while (!World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight + 1 - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y + Config.PHeight + 1 - World.mapY) / Tile.SIZE)) {
+      if (World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + velY + Config.PHeight /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y + velY + Config.PHeight /*- World.mapY*/) / Tile.SIZE)) {
+          while (!World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight + 1/* - World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y + Config.PHeight + 1 /*- World.mapY*/) / Tile.SIZE)) {
               y++;
           }
           //y = (y + velY) - ((y + velY) % Tile.SIZE);
           velY = 0;
-      } else if (World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y + velY - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y + velY - World.mapY) / Tile.SIZE)) {
-          while (!World.collision((int) (x + 1 - World.mapX) / Tile.SIZE, (int) (y - 1 - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth - 1 - World.mapX) / Tile.SIZE, (int) (int) (y - 1 - World.mapY) / Tile.SIZE)) {
+      } else if (World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + velY /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y + velY /*- World.mapY*/) / Tile.SIZE)) {
+          while (!World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y - 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y - 1 /*- World.mapY*/) / Tile.SIZE)) {
               y--;
           }
           //y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
@@ -53,13 +53,13 @@ public class Player {
       }
 
       //COLLISION LEFT/RIGHT
-      if (x + velX < -1 || World.collision((int) (x + velX - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x + velX - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
-          while (x > 0 && !World.collision((int) (x - 1 - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x - 1 - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
+      if (x + velX < -1 || World.collision((int) (x + velX /*- World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + velX /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight - 1 /*- World.mapY*/) / Tile.SIZE)) {
+          while (x > 0 && !World.collision((int) (x - 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x - 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight - 1/* - World.mapY*/) / Tile.SIZE)) {
               x--;
           }
           velX = 0;
-      } else if (World.collision((int) (x + velX + Config.PWidth - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x + velX + Config.PWidth - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
-          while (!World.collision((int) (x + Config.PWidth + 1 - World.mapX) / Tile.SIZE, (int) (y + 1 - World.mapY) / Tile.SIZE, (int) (x + Config.PWidth + 1 - World.mapX) / Tile.SIZE, (int) (y + Config.PHeight - 1 - World.mapY) / Tile.SIZE)) {
+      } else if (World.collision((int) (x + velX + Config.PWidth /*- World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + velX + Config.PWidth /*- World.mapX */) / Tile.SIZE, (int) (y + Config.PHeight - 1/* - World.mapY*/) / Tile.SIZE)) {
+          while (!World.collision((int) (x + Config.PWidth + 1 /*-World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight - 1/* - World.mapY*/) / Tile.SIZE)) {
               x++;
           }
           velX = 0;
@@ -69,11 +69,15 @@ public class Player {
   }
   
   public void moveX(boolean right) {
-    if(right && velX < 5) {
+    if(right && velX <= 5) {
       velX = velX + Config.PMoveSpeed;
-    } else if(!right && velX > -5) {
+    } else if(velX > 5) {
+        velX = 5;
+    }else if(!right && velX >= -5) {
       velX = velX - Config.PMoveSpeed;
-    } 
+    } else if(velX < -5) {
+        velX = -5;
+    }
   }
   public void slowX() {
     if(velX < - Config.PSlowSpeed) {
@@ -124,17 +128,17 @@ public class Player {
     this.velY = 0;
   }
   public void draw() {
-    Resources.getImage("player").draw(x,y);Resources.getImage("direction").setCenterOfRotation(0, 1);
+    Resources.getImage("player").draw(x + World.mapX,y + World.mapY);
   }
   
   public float getAngle() {
       float angle = 0;
       float[] position = Mouse.getPosition();
       if (StateManager.currentstate == StateManager.GAME) {
-          if (position[1] >= y + Config.PHeight / 2) {
-              angle = Utilities.AngleBetweenVectors(position[0] - (x + Config.PWidth / 2), position[1] - (y + Config.PHeight / 2), 1, 0);
+          if (position[1] >= y + Config.PHeight / 2 + World.mapY) {
+              angle = Utilities.AngleBetweenVectors(position[0] - (x + Config.PWidth / 2 + World.mapX), position[1] - (y + Config.PHeight / 2 + World.mapY), 1, 0);
           } else {
-              angle = 360 - Utilities.AngleBetweenVectors(position[0] - (x + Config.PWidth / 2), position[1] - (y + Config.PHeight / 2), 1, 0);
+              angle = 360 - Utilities.AngleBetweenVectors(position[0] - (x + Config.PWidth / 2 + World.mapX), position[1] - (y + Config.PHeight / 2 + World.mapY), 1, 0);
           }
       }
       return angle;

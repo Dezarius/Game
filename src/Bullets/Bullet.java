@@ -45,7 +45,7 @@ public class Bullet {
     
     public void draw() {
         Resources.getImage("Bullet_Pistol").setRotation(angle);
-        Resources.getImage("Bullet_Pistol").draw(x,y,Config.Bullet_PistolScale);
+        Resources.getImage("Bullet_Pistol").draw(x+ World.mapX,y + World.mapY,Config.Bullet_PistolScale);
     }
     
     public float getAngle() {
@@ -58,5 +58,11 @@ public class Bullet {
     
     public float getY() {
         return this.y;
+    }
+    public float nextX() {
+        return x + v1 * Config.Bullet_PistolSpeed;
+    }
+    public float nextY() {
+        return y + v2 * Config.Bullet_PistolSpeed;
     }
 }
