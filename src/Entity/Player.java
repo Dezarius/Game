@@ -79,11 +79,16 @@ public class Player {
         velX = -5;
     }
   }
-  public void slowX() {
-    if(velX < - Config.PSlowSpeed) {
-      velX = velX + Config.PSlowSpeed;
-    } else if(velX > Config.PSlowSpeed) {
-      velX = velX - Config.PSlowSpeed;
+  public void slowX(boolean isInAir) {
+    float slowFactor = 1;
+    if(isInAir) {
+        slowFactor = Config.PSlowAirFactor;
+    }
+    if(velX < - Config.PSlowSpeed * slowFactor) {
+      velX = velX + Config.PSlowSpeed * slowFactor;
+      
+    } else if(velX > Config.PSlowSpeed * slowFactor) {
+      velX = velX - Config.PSlowSpeed * slowFactor;
     }
     else {
       velX = 0;

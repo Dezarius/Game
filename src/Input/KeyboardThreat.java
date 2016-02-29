@@ -89,7 +89,7 @@ public class KeyboardThreat implements Runnable {
                     (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1,
                     (int) (EntityManager.player.getX() - mapx) / Tile.SIZE + 1,
                     (int) (EntityManager.player.getY() + EntityManager.player.getVelY() - mapy) / Tile.SIZE + 1)) {
-                EntityManager.player.slowX();
+                EntityManager.player.slowX(false);
             }
         }
     }

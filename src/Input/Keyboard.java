@@ -36,6 +36,9 @@ public class Keyboard {
         } else if (gc.getInput().isKeyPressed(Input.KEY_1)) {
             World.changeCurrentMap(1);
         }
+        else if (gc.getInput().isKeyPressed(Input.KEY_2)) {
+            World.changeCurrentMap(2);
+        }
     }
 
     private static int jumpCounter = 0;
@@ -68,8 +71,10 @@ public class Keyboard {
                         (int) (EntityManager.player.getY() + EntityManager.player.getVelY()) / Tile.SIZE + 1,
                         (int) (EntityManager.player.getX()) / Tile.SIZE + 1,
                         (int) (EntityManager.player.getY() + EntityManager.player.getVelY()) / Tile.SIZE + 1)) {
-                    EntityManager.player.slowX();
-                }
+                    EntityManager.player.slowX(false);
+                } else {
+                    EntityManager.player.slowX(true);
+                }  
             }
         }
     }

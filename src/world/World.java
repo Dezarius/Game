@@ -58,32 +58,38 @@ public class World {
         if (map != null) {
             if (StateManager.currentstate == StateManager.GAME) {
                 //Kamerabewegung links
-                if(mapX < -6 && EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - 110) {
+                if(mapX < -6 && EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset) {
                     mapX = mapX - (int) EntityManager.player.getVelX();
-                    if(EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - 110)
+                    if(EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset)
                         EntityManager.player.setX(1 - EntityManager.player.getX() % 1);
                 }
                 //Kamerabewegung rechts
-                else if(mapX + World.map.getWidth() * 32 - 6 > Window.WWIDTH && EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + 80) {
+                else if(mapX + World.map.getWidth() * Tile.SIZE - 6 > Window.WWIDTH && EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32) {
                     mapX = mapX - (int) (EntityManager.player.getVelX());
-                    if(EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + 80)
+                    if(EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32)
                         EntityManager.player.setX(- EntityManager.player.getX() % 1);
                 }
                 
                 //Kamerabewegung oben
-                if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - 100 && EntityManager.player.getVelY() != 0) {
-                    mapY = mapY - (int) EntityManager.player.getVelY();
+                if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - Config.CameraYOffset && EntityManager.player.getVelY() != 0) {
+                    if(EntityManager.player.getVelY() <= 0)
+                        mapY = mapY - (int) EntityManager.player.getVelY();
                 }
-                else if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - 100) {
+                else if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - Config.CameraYOffset) {
                     mapY += 5;
                 }
                 //Kamerabewegung unten
-                else if(mapY + World.map.getHeight() * 32 - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + 100 && EntityManager.player.getVelY() != 0) {
-                    mapY = mapY - (int) EntityManager.player.getVelY();
+                else if(mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32 && EntityManager.player.getVelY() != 0) {
+                    if(EntityManager.player.getVelY() >= 0)
+                        mapY = mapY - (int) EntityManager.player.getVelY();
                 }
-                else if(mapY + World.map.getHeight() * 32 - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + 100) {
+                else if(mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32) {
                     mapY -= 5;
                 }
+                
+                /*if((mapY + World.map.getHeight() * Tile.SIZE - 1 <= Window.WHEIGHT)) {
+                    mapY += 1;
+                } */
 
                 
             }
@@ -116,7 +122,7 @@ public class World {
         if (loadedMap > -1 && (x < 0 || x > map.getWidth() || y < 0 || y > map.getHeight())) {
             return false;
         }
-        if (loadedMap > -1 && (map.getTileId(x, y, map.getLayerIndex("solids")) != 0)) {
+        if (loadedMap > -1 && (map.getTileId(x, y, map.getLayerIndex("solids")) == 11)) {
             return true;
         }
         return false;
@@ -130,12 +136,25 @@ public class World {
         }
         for (int i = x; i <= endx; i++) {
             for (int j = y; j <= endy; j++) {
-                if (isSolid(i, j)) {
-                    return true;
+                if(loadedMap > -1) {
+                    int id = map.getTileId(i, j, map.getLayerIndex("solids"));
+                    if(id == 11) {
+                        return isSolid(i,j);
+                    }
+                    else if(id == 19) { //Schräge untenlinks
+                        if(EntityManager.player.getX() - i * 32 < EntityManager.player.getY() + 32 - j * 32) 
+                            return true;
+                    }
                 }
             }
         }
 
+        return false;
+    }
+    
+    public static boolean slope(int x , int y , int endx, int endy) {
+        
+        
         return false;
     }
 

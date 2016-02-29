@@ -3,14 +3,14 @@
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="81" columns="9">
   <image source="tilesheet.png" width="288" height="288"/>
  </tileset>
- <layer name="solids" width="50" height="50" visible="0">
+ <layer name="solids" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3SOw6AMBAD0e1z//tyAcInrO0IjaXXUewAo6oGgE/O9ubZqyUbZjesLnV/9/7SUQ330tE/R4fjPbm+h/pbO/8r5f+q6FC03E3V0dXydImO7ikbnC2ODkeLq0PV4rxf2ZLq6OpJ37/alb4PAAAAAAAAALCfA7oQZdMQJwAA
+   H4sIAAAAAAAAC+2XOw7AIAxD2bn/fasOXZCKSOMQ4+ZJGYvz+In21lr/WUWj4DCi4DCi4PCg4PCGisdNeXCh4OE5H2z3uTeHwQHhsTpG9H5F5WU6WPJRY0WROYdIsvcDguyziYTVxZrPcGda+/n6XbQLItfj4fFB5yE8dld5cJWCg/J6lAeXw2keM7J7K4e5y6mUBxeePcmEgofFgd11tTe2vkeY59hCeWDH8MLQgxf2O8jCLo/ojFoPfLbn7Z79b1GlXRe6EL85ECcAAA==
   </data>
  </layer>
  <layer name="interactives" width="50" height="50">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OMQ0AAAgDsL34N4yMQdIqaALAZdMOAAAAAAAAAAA8sd0KIcwQJwAA
+   H4sIAAAAAAAAC+3OMQkAAAwDsL7zb3gyCiVRkAQAuq4dAAAAAAAAAAAmPO5AqSMQJwAA
   </data>
  </layer>
 </map>

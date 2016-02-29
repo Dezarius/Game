@@ -14,9 +14,10 @@ public class Config {
     public static String GameName = "SuperDuperShooter";
     
     //Player
-    public static int AmountOFJumps = 3;
+    public static int AmountOFJumps = 2;
     public static float PMoveSpeed = 0.2f;
-    public static float PSlowSpeed = 0.25f; 
+    public static float PSlowSpeed = 0.25f;
+    public static float PSlowAirFactor = 0.19f;
     public static int PWidth = 32;
     public static int PHeight = 32;
     public static float JumpHeight = 6;
@@ -49,6 +50,10 @@ public class Config {
     public static float BackgroundScale = 1.2f;
     public static float BackgroundX = 200;
     public static float BackgroundY = 100;
+    
+    //Camera
+    public static int CameraYOffset = 90;
+    public static int CameraXOffset = 110;
     
     //Bullets
     public static float Bullet_PistolSpeed = 15f;
