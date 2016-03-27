@@ -32,18 +32,18 @@ public class Resources {
     sounds = new HashMap<>();
     
     try {
-      sprites.put("tileset", loadSprite("tilesheet.png",Tile.SIZE,Tile.SIZE));
-      images.put("MapOverlay",loadImage("mapOverlay.png"));
-      images.put("Background", loadImage("background.png"));
-      images.put("Background2", loadImage("background2.jpg"));
-      images.put("Background3", loadImage("background3.jpg"));
-      images.put("Background4", loadImage("background4.jpg"));
-      images.put("Background5", loadImage("background5.jpg"));
-      images.put("Background6", loadImage("background6.jpg"));
-      images.put("player",loadImage("player.png"));
-      images.put("menuPic", loadImage("menu.png"));
-      images.put("direction", loadImage("Richtung.png"));
-      images.put("Bullet_Pistol", loadImage("Bullet_Pistol.png"));
+      sprites.put("tileset", loadSprite("res/tilesheet.png",Tile.SIZE,Tile.SIZE));
+      images.put("MapOverlay",loadImage("res/mapOverlay.png"));
+      images.put("Background", loadImage("res/background.png"));
+      images.put("Background2", loadImage("res/background2.jpg"));
+      images.put("Background3", loadImage("res/background3.jpg"));
+      images.put("Background4", loadImage("res/background4.jpg"));
+      images.put("Background5", loadImage("res/background5.jpg"));
+      images.put("Background6", loadImage("res/background6.jpg"));
+      images.put("player",loadImage("res/player.png"));
+      images.put("menuPic", loadImage("res/menu.png"));
+      images.put("direction", loadImage("res/Richtung.png"));
+      images.put("Bullet_Pistol", loadImage("res/Bullet_Pistol.png"));
     } catch (SlickException ex) {
       System.out.println("FEHLER beim Laden der Resources. Eine gelöscht?!?");
       Logger.getLogger(Resources.class.getName()).log(Level.SEVERE, null, ex);
