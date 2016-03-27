@@ -54,7 +54,7 @@ public class World {
      * Renders the current map
      */
     public static void renderCurrentMap() {
-        Resources.getImage("Background6").draw(mapX * Config.BackgroundMovement - Config.BackgroundX, mapY * Config.BackgroundMovement - Config.BackgroundY, Config.BackgroundScale);
+        Resources.getImage("Background").draw(mapX * Config.BackgroundMovement - Config.BackgroundX, mapY * Config.BackgroundMovement - Config.BackgroundY, Config.BackgroundScale);
         if (map != null) {
             if (StateManager.currentstate == StateManager.GAME) {
                 //Kamerabewegung links

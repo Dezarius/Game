@@ -3,6 +3,7 @@
  */
 package main;
 
+import Bullets.BulletManager;
 import Config.Config;
 import Entity.EntityManager;
 import gui.Resources;
@@ -32,6 +33,7 @@ public class Debug {
             g.drawString("Map:" + String.valueOf((int) World.mapX) +  "|" + String.valueOf((int) World.mapY), 0, 42);
             g.drawString("Mouse:" +  (int) Mouse.getPosition()[0] + "|" + (int) Mouse.getPosition()[1] , 0, 56);
             g.drawString("MouseMap:" + (int) (Mouse.getPosition()[0] - World.mapX) + "|" + (int) (Mouse.getPosition()[1] - World.mapY) ,0,70);
+            g.drawString("Bullets: " + BulletManager.amountOfBullets(),0,84);
             drawDirection();
         }
     }
