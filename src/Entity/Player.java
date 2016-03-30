@@ -7,7 +7,6 @@ package Entity;
 import Config.Config;
 import Input.Mouse;
 import gui.Resources;
-import main.Debug;
 import main.Utilities;
 import states.StateManager;
 import world.Tile;
@@ -35,17 +34,15 @@ public class Player {
   public void move() {
 
       //COLLISION UP/BOT
-      if (World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + velY + Config.PHeight /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y + velY + Config.PHeight /*- World.mapY*/) / Tile.SIZE)) {
-          while (!World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight + 1/* - World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y + Config.PHeight + 1 /*- World.mapY*/) / Tile.SIZE)) {
+      if (World.collision((int) (x + 1) / Tile.SIZE, (int) (y + velY + Config.PHeight) / Tile.SIZE, (int) (x + Config.PWidth - 1) / Tile.SIZE, (int) (int) (y + velY + Config.PHeight) / Tile.SIZE)) {
+          while (!World.collision((int) (x + 1) / Tile.SIZE, (int) (y + Config.PHeight + 1) / Tile.SIZE, (int) (x + Config.PWidth - 1 ) / Tile.SIZE, (int) (int) (y + Config.PHeight + 1) / Tile.SIZE)) {
               y++;
           }
-          //y = (y + velY) - ((y + velY) % Tile.SIZE);
           velY = 0;
-      } else if (World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + velY /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y + velY /*- World.mapY*/) / Tile.SIZE)) {
-          while (!World.collision((int) (x + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y - 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth - 1 /*- World.mapX*/) / Tile.SIZE, (int) (int) (y - 1 /*- World.mapY*/) / Tile.SIZE)) {
+      } else if (World.collision((int) (x + 1) / Tile.SIZE, (int) (y + velY) / Tile.SIZE, (int) (x + Config.PWidth - 1) / Tile.SIZE, (int) (int) (y + velY) / Tile.SIZE)) {
+          while (!World.collision((int) (x + 1) / Tile.SIZE, (int) (y - 1) / Tile.SIZE, (int) (x + Config.PWidth - 1) / Tile.SIZE, (int) (int) (y - 1) / Tile.SIZE)) {
               y--;
           }
-          //y = y = (y + velY) + (Tile.SIZE - (y + velY) % Tile.SIZE);
           velY = 0;
       } else {
           velY = EntityManager.applyGravity(velY);
@@ -53,13 +50,13 @@ public class Player {
       }
 
       //COLLISION LEFT/RIGHT
-      if (x + velX < -1 || World.collision((int) (x + velX /*- World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + velX /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight - 1 /*- World.mapY*/) / Tile.SIZE)) {
-          while (x > 0 && !World.collision((int) (x - 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x - 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight - 1/* - World.mapY*/) / Tile.SIZE)) {
+      if (x + velX < -1 || World.collision((int) (x + velX ) / Tile.SIZE, (int) (y + 1 ) / Tile.SIZE, (int) (x + velX) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
+          while (x > 0 && !World.collision((int) (x - 1 ) / Tile.SIZE, (int) (y + 1 ) / Tile.SIZE, (int) (x - 1) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
               x--;
           }
           velX = 0;
-      } else if (World.collision((int) (x + velX + Config.PWidth /*- World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + velX + Config.PWidth /*- World.mapX */) / Tile.SIZE, (int) (y + Config.PHeight - 1/* - World.mapY*/) / Tile.SIZE)) {
-          while (!World.collision((int) (x + Config.PWidth + 1 /*-World.mapX*/) / Tile.SIZE, (int) (y + 1 /*- World.mapY*/) / Tile.SIZE, (int) (x + Config.PWidth + 1 /*- World.mapX*/) / Tile.SIZE, (int) (y + Config.PHeight - 1/* - World.mapY*/) / Tile.SIZE)) {
+      } else if (World.collision((int) (x + velX + Config.PWidth ) / Tile.SIZE, (int) (y + 1) / Tile.SIZE, (int) (x + velX + Config.PWidth) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
+          while (!World.collision((int) (x + Config.PWidth + 1 ) / Tile.SIZE, (int) (y + 1) / Tile.SIZE, (int) (x + Config.PWidth + 1) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
               x++;
           }
           velX = 0;

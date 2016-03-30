@@ -59,7 +59,6 @@ public class GameState extends BasicGameState {
     EntityManager.player.draw();
     BulletManager.draw();
     Debug.render(gc,s,g);
-    //g.drawString("Game", 50, 50);
   }
   
   /**
@@ -76,6 +75,7 @@ public class GameState extends BasicGameState {
     Keyboard.changeMap(gc);
     Keyboard.playerInput(gc);
     Mouse.Input();
+    World.cameraFollowsPlayer();
     BulletManager.update();
     EntityManager.player.move();
     Debug.update();

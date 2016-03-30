@@ -9,7 +9,7 @@ import world.World;
 
 /**
  *
- * @author Jan
+ * @author Jan Abelmann
  */
 public class Bullet {
     private float x;
@@ -25,22 +25,11 @@ public class Bullet {
         this.v2 = (float) ((v2-10) / Math.sqrt(v1*v1+v2*v2));
         this.angle = angle;
     }
-    
-    private float savedMapX = World.mapX;
-    private float savedMapY = World.mapY;
-    
+       
     public void move() {      
         x += v1 * Config.Bullet_PistolSpeed;
         y += v2 * Config.Bullet_PistolSpeed;
 
-        if(savedMapX != World.mapX) {
-            x -= savedMapX - World.mapX;
-            savedMapX = World.mapX;
-        }
-        if(savedMapY != World.mapY) {
-            y -= savedMapY - World.mapY;
-            savedMapY = World.mapY;
-        }
     }
     
     public void draw() {

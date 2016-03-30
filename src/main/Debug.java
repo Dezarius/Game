@@ -13,10 +13,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
 
-/**
- *
- * @author janabelmann
- */
 public class Debug {
 
     public static boolean debugMode = false;

@@ -46,7 +46,6 @@ public class BulletManager {
         }
         for(Object o : removeList) {
             bullets.remove(o);
-            //System.out.println("löschen");
         }
 
     }

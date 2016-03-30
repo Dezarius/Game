@@ -12,10 +12,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import states.StateManager;
 
-/**
- *
- *
- */
+
 public class World {
 
     public static TiledMap map = null;
@@ -48,7 +45,6 @@ public class World {
 
     public static int mapX = 0;
     public static int mapY = 0;
-    //public static int velMapX
 
     /**
      * Renders the current map
@@ -56,44 +52,43 @@ public class World {
     public static void renderCurrentMap() {
         Resources.getImage("Background").draw(mapX * Config.BackgroundMovement - Config.BackgroundX, mapY * Config.BackgroundMovement - Config.BackgroundY, Config.BackgroundScale);
         if (map != null) {
+            map.render((int)mapX, (int) mapY, map.getLayerIndex("solids")); 
+        }
+    }
+    
+    public static void cameraFollowsPlayer() {
+        if (map != null) {
             if (StateManager.currentstate == StateManager.GAME) {
                 //Kamerabewegung links
-                if(mapX < -6 && EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset) {
+                if (mapX < -6 && EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset) {
                     mapX = mapX - (int) EntityManager.player.getVelX();
-                    if(EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset)
+                    if (EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset) {
                         EntityManager.player.setX(1 - EntityManager.player.getX() % 1);
-                }
-                //Kamerabewegung rechts
-                else if(mapX + World.map.getWidth() * Tile.SIZE - 6 > Window.WWIDTH && EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32) {
+                    }
+                } //Kamerabewegung rechts
+                else if (mapX + World.map.getWidth() * Tile.SIZE - 6 > Window.WWIDTH && EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32) {
                     mapX = mapX - (int) (EntityManager.player.getVelX());
-                    if(EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32)
-                        EntityManager.player.setX(- EntityManager.player.getX() % 1);
+                    if (EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32) {
+                        EntityManager.player.setX(-EntityManager.player.getX() % 1);
+                    }
                 }
-                
+
                 //Kamerabewegung oben
-                if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - Config.CameraYOffset && EntityManager.player.getVelY() != 0) {
-                    if(EntityManager.player.getVelY() <= 0)
+                if (mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - Config.CameraYOffset && EntityManager.player.getVelY() != 0) {
+                    if (EntityManager.player.getVelY() <= 0) {
                         mapY = mapY - (int) EntityManager.player.getVelY();
-                }
-                else if(mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - Config.CameraYOffset) {
+                    }
+                } else if (mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - Config.CameraYOffset) {
                     mapY += 5;
-                }
-                //Kamerabewegung unten
-                else if(mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32 && EntityManager.player.getVelY() != 0) {
-                    if(EntityManager.player.getVelY() >= 0)
+                } //Kamerabewegung unten
+                else if (mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32 && EntityManager.player.getVelY() != 0) {
+                    if (EntityManager.player.getVelY() >= 0) {
                         mapY = mapY - (int) EntityManager.player.getVelY();
-                }
-                else if(mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32) {
+                    }
+                } else if (mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32) {
                     mapY -= 5;
                 }
-                
-                /*if((mapY + World.map.getHeight() * Tile.SIZE - 1 <= Window.WHEIGHT)) {
-                    mapY += 1;
-                } */
-
-                
             }
-            map.render((int)mapX, (int) mapY, map.getLayerIndex("solids")); 
         }
     }
 
