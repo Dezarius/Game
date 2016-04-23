@@ -41,8 +41,8 @@ public class Config {
     public static boolean Fullscreen = false;
     public static int WindowWidth = 1280;
     public static int WindowHeight = 720;
-    public static int Framerate = 10;
-    public static int LogicRate = 17; // 16 milisec until next update
+    public static int Framerate = 60;
+    public static int LogicRate = 16; // 16 milisec until next update
     public static boolean VSync = true;
  
     //World

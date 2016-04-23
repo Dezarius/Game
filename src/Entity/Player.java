@@ -47,7 +47,7 @@ public class Player {
       } else {
           velY = EntityManager.applyGravity(velY);
           y = y + velY;
-      }
+      } 
 
       //COLLISION LEFT/RIGHT
       if (x + velX < -1 || World.collision((int) (x + velX ) / Tile.SIZE, (int) (y + 1 ) / Tile.SIZE, (int) (x + velX) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
@@ -68,11 +68,11 @@ public class Player {
   public void moveX(boolean right) {
     if(right && velX <= 5) {
       velX = velX + Config.PMoveSpeed;
-    } else if(velX > 5) {
+    } else if(right &&velX >= 5) {
         velX = 5;
     }else if(!right && velX >= -5) {
       velX = velX - Config.PMoveSpeed;
-    } else if(velX < -5) {
+    } else if(velX <= -5) {
         velX = -5;
     }
   }
@@ -81,10 +81,10 @@ public class Player {
     if(isInAir) {
         slowFactor = Config.PSlowAirFactor;
     }
-    if(velX < - Config.PSlowSpeed * slowFactor) {
+    if(velX < -Config.PSlowSpeed * slowFactor * 3) {
       velX = velX + Config.PSlowSpeed * slowFactor;
       
-    } else if(velX > Config.PSlowSpeed * slowFactor) {
+    } else if(velX > Config.PSlowSpeed * slowFactor * 3) {
       velX = velX - Config.PSlowSpeed * slowFactor;
     }
     else {

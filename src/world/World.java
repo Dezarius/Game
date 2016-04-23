@@ -62,14 +62,14 @@ public class World {
                 //Kamerabewegung links
                 if (mapX < -6 && EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset) {
                     mapX = mapX - (int) EntityManager.player.getVelX();
-                    if (EntityManager.player.getX() + mapX < Window.WWIDTH / 2 - Config.CameraXOffset) {
-                        EntityManager.player.setX(1 - EntityManager.player.getX() % 1);
+                    while(EntityManager.player.getX() + mapX <= (int) (Window.WWIDTH / 2 - Config.CameraXOffset)) {
+                        mapX++;
                     }
                 } //Kamerabewegung rechts
                 else if (mapX + World.map.getWidth() * Tile.SIZE - 6 > Window.WWIDTH && EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32) {
                     mapX = mapX - (int) (EntityManager.player.getVelX());
-                    if (EntityManager.player.getX() + mapX > Window.WWIDTH / 2 + Config.CameraXOffset - 32) {
-                        EntityManager.player.setX(-EntityManager.player.getX() % 1);
+                    while(EntityManager.player.getX() + mapX >= (int) (Window.WWIDTH / 2 + Config.CameraXOffset - 32)) {
+                        mapX--;
                     }
                 }
 
