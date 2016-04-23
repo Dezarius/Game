@@ -56,7 +56,7 @@ public class Player {
           }
           velX = 0;
       } else if (World.collision((int) (x + velX + Config.PWidth ) / Tile.SIZE, (int) (y + 1) / Tile.SIZE, (int) (x + velX + Config.PWidth) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
-          while (!World.collision((int) (x + Config.PWidth + 1 ) / Tile.SIZE, (int) (y + 1) / Tile.SIZE, (int) (x + Config.PWidth + 1) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
+          while (!World.collision((int) (x + Config.PWidth) / Tile.SIZE, (int) (y + 1) / Tile.SIZE, (int) (x + Config.PWidth) / Tile.SIZE, (int) (y + Config.PHeight - 1) / Tile.SIZE)) {
               x++;
           }
           velX = 0;

@@ -41,8 +41,10 @@ public class Config {
     public static boolean Fullscreen = false;
     public static int WindowWidth = 1280;
     public static int WindowHeight = 720;
+
+    public static float Scale = 1;
     public static int Framerate = 60;
-    public static int LogicRate = 16; // 16 milisec until next update
+    public static int LogicRate = 17; // 16 milisec until next update
     public static boolean VSync = true;
  
     //World
@@ -52,8 +54,8 @@ public class Config {
     public static float BackgroundY = 100;
     
     //Camera
-    public static int CameraYOffset = 90;
-    public static int CameraXOffset = 110;
+    public static int CameraYOffset = (int) (90 * Scale);
+    public static int CameraXOffset = (int) (110 * Scale);
     
     //Bullets
     public static float Bullet_PistolSpeed = 15f;

@@ -8,6 +8,7 @@ import Config.Config;
 import Entity.EntityManager;
 import gui.Resources;
 import gui.Window;
+import java.awt.Graphics2D;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 import states.StateManager;
@@ -52,7 +53,8 @@ public class World {
     public static void renderCurrentMap() {
         Resources.getImage("Background").draw(mapX * Config.BackgroundMovement - Config.BackgroundX, mapY * Config.BackgroundMovement - Config.BackgroundY, Config.BackgroundScale);
         if (map != null) {
-            map.render((int)mapX, (int) mapY, map.getLayerIndex("solids")); 
+            map.render((int)mapX, (int) mapY, map.getLayerIndex("solids"));
+            cameraFollowsPlayer();
         }
     }
     
@@ -81,14 +83,14 @@ public class World {
                 } else if (mapY < -6 && EntityManager.player.getY() + mapY < Window.WHEIGHT / 2 - Config.CameraYOffset) {
                     mapY += 5;
                 } //Kamerabewegung unten
-                else if (mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32 && EntityManager.player.getVelY() != 0) {
+                else if (mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT * Config.Scale / 2 + Config.CameraYOffset - 32 && EntityManager.player.getVelY() != 0) {
                     if (EntityManager.player.getVelY() >= 0) {
                         mapY = mapY - (int) EntityManager.player.getVelY();
                     }
-                } else if (mapY + World.map.getHeight() * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT / 2 + Config.CameraYOffset - 32) {
+                } else if (mapY + World.map.getHeight() * Config.Scale * Tile.SIZE - 6 > Window.WHEIGHT && EntityManager.player.getY() + mapY > Window.WHEIGHT * Config.Scale / 2 + Config.CameraYOffset - 32) {
                     mapY -= 5;
                 }
-            }
+            } 
         }
     }
 
@@ -134,7 +136,7 @@ public class World {
                 if(loadedMap > -1) {
                     int id = map.getTileId(i, j, map.getLayerIndex("solids"));
                     if(id == 11) {
-                        return isSolid(i,j);
+                        return true;
                     }
                     else if(id == 19) { //Schräge untenlinks
                         if(EntityManager.player.getX() - i * 32 < EntityManager.player.getY() + 32 - j * 32) 

@@ -53,6 +53,7 @@ public class InGameMenuState extends BasicGameState {
    */
   @Override
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
+    //g.scale(Co, sy);
     World.renderCurrentMap();
     EntityManager.player.draw();
     Resources.getImage("MapOverlay").draw(0, 0);

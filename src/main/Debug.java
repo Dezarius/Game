@@ -30,6 +30,7 @@ public class Debug {
             g.drawString("Mouse:" +  (int) Mouse.getPosition()[0] + "|" + (int) Mouse.getPosition()[1] , 0, 56);
             g.drawString("MouseMap:" + (int) (Mouse.getPosition()[0] - World.mapX) + "|" + (int) (Mouse.getPosition()[1] - World.mapY) ,0,70);
             g.drawString("Bullets: " + BulletManager.amountOfBullets(),0,84);
+            g.drawString("Window: " + Config.WindowHeight + " | " +  Config.WindowWidth +  " , " + Config.Scale,0,98);
             drawDirection();
         }
     }

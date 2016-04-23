@@ -5,6 +5,7 @@
 package states;
 
 import Bullets.BulletManager;
+import Config.Config;
 import Entity.EntityManager;
 import Input.Keyboard;
 import Input.Mouse;
@@ -55,6 +56,7 @@ public class GameState extends BasicGameState {
    */
   @Override
   public void render(GameContainer gc, StateBasedGame s, Graphics g) throws SlickException {
+    g.scale(Config.Scale, Config.Scale);
     World.renderCurrentMap();
     EntityManager.player.draw();
     BulletManager.draw();
@@ -75,7 +77,7 @@ public class GameState extends BasicGameState {
     Keyboard.changeMap(gc);
     Keyboard.playerInput(gc);
     Mouse.Input();
-    World.cameraFollowsPlayer();
+    //World.cameraFollowsPlayer();
     BulletManager.update();
     EntityManager.player.move();
     Debug.update();
